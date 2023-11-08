@@ -1,3 +1,12 @@
+/*
+ * :file description: 
+ * :name: /intelligent/app/locales/cn.ts
+ * :author: 张德志
+ * :copyright: (c) 2023, Tungee
+ * :date created: 2023-09-20 09:01:06
+ * :last editor: 张德志
+ * :date last edited: 2023-11-08 22:02:15
+ */
 import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
 
@@ -330,8 +339,8 @@ const cn = {
     Clear: "上下文已清除",
     Revert: "恢复上下文",
   },
-  Plugin: {
-    Name: "插件",
+  User: {
+    Name: "个人中心",
   },
   FineTuned: {
     Sysmessage: "你是一个助手",
