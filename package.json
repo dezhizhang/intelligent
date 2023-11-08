@@ -2,7 +2,7 @@
   "name": "intelligent",
   "private": false,
   "license": "mit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "next dev",
     "build": "cross-env BUILD_MODE=standalone next build",

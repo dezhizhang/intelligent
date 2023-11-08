@@ -336,8 +336,8 @@ const en: LocaleType = {
     Clear: "Context Cleared",
     Revert: "Revert",
   },
-  Plugin: {
-    Name: "Plugin",
+  User: {
+    Name: "User",
   },
   FineTuned: {
     Sysmessage: "You are an assistant that",

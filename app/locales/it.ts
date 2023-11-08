@@ -188,8 +188,8 @@ const it: PartialLocaleType = {
     Edit: "Prompt contestuali e di memoria",
     Add: "Aggiungi altro",
   },
-  Plugin: {
-    Name: "Plugin",
+  User: {
+    Name: "User",
   },
   FineTuned: {
     Sysmessage: "Sei un assistente che",

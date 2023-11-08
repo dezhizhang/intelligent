@@ -230,7 +230,7 @@ ${builtin} مدمجة، ${custom} تم تعريفها من قبل المستخد
     Clear: "مسح السياق",
     Revert: "التراجع",
   },
-  Plugin: {
+  User: {
     Name: "المكوّن الإضافي",
   },
   FineTuned: {

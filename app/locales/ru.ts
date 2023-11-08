@@ -188,7 +188,7 @@ const ru: PartialLocaleType = {
     Edit: "Контекстные и памятные подсказки",
     Add: "Добавить подсказку",
   },
-  Plugin: {
+  User: {
     Name: "Плагин",
   },
   FineTuned: {

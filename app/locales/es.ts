@@ -187,8 +187,8 @@ const es: PartialLocaleType = {
     Edit: "Contextual and Memory Prompts",
     Add: "Add One",
   },
-  Plugin: {
-    Name: "Plugin",
+  User: {
+    Name: "User",
   },
   FineTuned: {
     Sysmessage: "Eres un asistente que",

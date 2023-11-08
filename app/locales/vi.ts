@@ -183,8 +183,8 @@ const vi: PartialLocaleType = {
     Edit: "Thiết lập ngữ cảnh và bộ nhớ",
     Add: "Thêm tin nhắn",
   },
-  Plugin: {
-    Name: "Plugin",
+  User: {
+    Name: "User",
   },
   FineTuned: {
     Sysmessage: "Bạn là một trợ lý",

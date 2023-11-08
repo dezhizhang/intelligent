@@ -183,7 +183,7 @@ const ko: PartialLocaleType = {
     Edit: "컨텍스트 및 메모리 프롬프트",
     Add: "프롬프트 추가",
   },
-  Plugin: {
+  User: {
     Name: "플러그인",
   },
   FineTuned: {

@@ -207,7 +207,7 @@ const jp: PartialLocaleType = {
     Edit: "キャラクタープリセットとモデル設定",
     Add: "追加",
   },
-  Plugin: { Name: "プラグイン" },
+  User: { Name: "プラグイン" },
   FineTuned: { Sysmessage: "あなたはアシスタントです" },
   Mask: {
     Name: "キャラクタープリセット",
