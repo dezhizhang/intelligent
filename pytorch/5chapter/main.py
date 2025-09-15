@@ -1,0 +1,17 @@
+# import torch
+#
+# dev = torch.device("cpu")
+# a = torch.tensor([2,2],dtype=torch.float64,device=dev)
+#
+# print(a)
+
+import torch
+
+dev = torch.device("cpu")
+
+i = torch.tensor([[0,1,2],[0,1,2]])
+v = torch.tensor([1,2,3])
+a = torch.sparse_coo_tensor(i,v,(4,4)).to_sparse()
+
+print(a)
+
