@@ -1,6 +1,8 @@
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",
@@ -8,17 +10,19 @@ llm = ChatOpenAI(
     base_url="https://poloai.top/v1"
 )
 
-# 指定输出格式
-json_parser = StrOutputParser()
-output_parser = StrOutputParser()
 
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "你是世界级的技术文档编写者"),
-    ("user", """请用JSON格式回答问题。: {input}"""
-     )
-])
+# 指定输出模式
+output_parser = StrOutputParser();
+
+# 提示词
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system","你是世界级的技术文档编写者"),
+        ("user","请用JSON格式回答问题。: {input}")
+    ]
+)
 
 chain = prompt | llm | output_parser
 
-message = chain.invoke({"input": "langchain是什么?"})
+message = chain.invoke({"input":"langchain是什么"})
 print(message)
