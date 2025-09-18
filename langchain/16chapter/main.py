@@ -1,17 +1,5 @@
-
-
-# from langchain_openai import ChatOpenAI
-#
-# llm = ChatOpenAI(
-#     model="gpt-4o-mini",
-#     api_key="sk-ifGCp8P1b7mgq2AiJxLDDkZcCjF4KoukEEhzVfpzPufSBJQs",
-#     base_url="https://poloai.top/v1"
-# )
-#
-# response = llm.invoke("你好，贵州数擎科技有限公司")
-# print(response.content)
-
 from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage,HumanMessage
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",
@@ -19,5 +7,14 @@ llm = ChatOpenAI(
     base_url="https://poloai.top/v1"
 )
 
-response = llm.invoke("贵州数擎科技有限公司")
-print(response.content)
+messages = [
+    SystemMessage(content="你是一个英语学习方向的专家"),
+    HumanMessage(content="帮我制定一个英语六级学习的计划")
+]
+
+responses = llm.invoke(messages)
+print(responses.content)
+
+
+
+
