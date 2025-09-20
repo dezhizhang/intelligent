@@ -1,6 +1,6 @@
 # langchain
 
-##     
+##  模型调用  
 
 ### invoke 函数的调用
 
@@ -124,61 +124,41 @@ print(resp.content)
 
 ## 提示词
 
-### 使用构造方法获取实例PromptTemplate
+### 字符串模板PromptTemplate
 
 ```python
-
-from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    api_key="sk-ifGCp8P1b7mgq2AiJxLDDkZcCjF4KoukEEhzVfpzPufSBJQs",
-    base_url="https://poloai.top/v1"
-)
+prompt = PromptTemplate.from_template("请评价 {product} 的优点,包括{aspect1}和{aspect2}")
+template = prompt.format(product="手机",aspect1="屏幕",aspect2="拍照")
 
-# 创建input
-prompt_template = PromptTemplate(
-    template="你是一个{role},你的名字叫{name}",
-    input_variables=["role", "name"]
-)
-prompt = prompt_template.format(role="人工智能专家", name="晓智")
-
-resp = llm.invoke(prompt)
-print(resp.content)
-
+print(template)
 
 ```
-
-### 调用大模型
-
+### 聊天模板ChatPromptTemplate
 ```python
-
-
-from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-# 创建大模型
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    api_key="sk-ifGCp8P1b7mgq2AiJxLDDkZcCjF4KoukEEhzVfpzPufSBJQs",
-    base_url="https://poloai.top/v1"
-)
-
-# 创建提示词
-prompt_template = ChatPromptTemplate.from_messages(
+chat_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "你是一个AI助手,你的名字叫{name}"),
-        ("human", "我的问题是{question}")
+        ("system","你是一个起名大师,你的名字叫{name}."),
+        ("human","您好{name} 您感觉如何"),
+        ("ai","你好！你状态非常好"),
+        ("human","你叫什么名字"),
+        ("ai","你好，我叫{name}"),
+        ("human","user_input")
     ]
 )
 
-prompt = prompt_template.invoke({"name": "晓智", "question": "1 + 2 * 3 = ?"})
-response = llm.invoke(prompt)
 
-print(response.content)
+chats = chat_template.format_messages(name="陈大师",user_input="你的爸爸是谁？")
+
+print(chats)
+
 
 ```
+
+
 
 ### 插入提示词模板
 
