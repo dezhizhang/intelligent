@@ -158,7 +158,43 @@ print(chats)
 
 ```
 
+### MessagesPlaceholder 消息占位符
+```python
+from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
+from langchain_core.messages import HumanMessage
 
+prompt_template = ChatPromptTemplate(
+    [
+        ("system", "你是一个历害的人工智能助手"),
+        MessagesPlaceholder(variable_name="msgs"),
+    ]
+)
+
+result = prompt_template.invoke({"msgs":[HumanMessage(content="hi!")]})
+print(result)
+
+```
+### 模板组合
+```python
+from langchain_core.messages import SystemMessage,HumanMessage,AIMessage
+
+sy = SystemMessage(
+    content="你是一个起名大师",
+    additional_kwars={"大师姓名":"陈瞎子"}
+)
+
+hu = HumanMessage(
+    content="请问大师叫什么"
+)
+
+ai = AIMessage(
+    content="我叫陈瞎子"
+)
+
+prompt = [sy,hu,ai]
+print(prompt)
+
+```
 
 ### 插入提示词模板
 
