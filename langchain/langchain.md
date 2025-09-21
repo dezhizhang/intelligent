@@ -1,6 +1,6 @@
 # langchain
 
-##  模型调用  
+## 模型调用
 
 ### invoke 函数的调用
 
@@ -130,28 +130,29 @@ print(resp.content)
 from langchain_core.prompts import PromptTemplate
 
 prompt = PromptTemplate.from_template("请评价 {product} 的优点,包括{aspect1}和{aspect2}")
-template = prompt.format(product="手机",aspect1="屏幕",aspect2="拍照")
+template = prompt.format(product="手机", aspect1="屏幕", aspect2="拍照")
 
 print(template)
 
 ```
+
 ### 聊天模板ChatPromptTemplate
+
 ```python
 from langchain_core.prompts import ChatPromptTemplate
 
 chat_template = ChatPromptTemplate.from_messages(
     [
-        ("system","你是一个起名大师,你的名字叫{name}."),
-        ("human","您好{name} 您感觉如何"),
-        ("ai","你好！你状态非常好"),
-        ("human","你叫什么名字"),
-        ("ai","你好，我叫{name}"),
-        ("human","user_input")
+        ("system", "你是一个起名大师,你的名字叫{name}."),
+        ("human", "您好{name} 您感觉如何"),
+        ("ai", "你好！你状态非常好"),
+        ("human", "你叫什么名字"),
+        ("ai", "你好，我叫{name}"),
+        ("human", "user_input")
     ]
 )
 
-
-chats = chat_template.format_messages(name="陈大师",user_input="你的爸爸是谁？")
+chats = chat_template.format_messages(name="陈大师", user_input="你的爸爸是谁？")
 
 print(chats)
 
@@ -159,8 +160,9 @@ print(chats)
 ```
 
 ### MessagesPlaceholder 消息占位符
+
 ```python
-from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage
 
 prompt_template = ChatPromptTemplate(
@@ -170,17 +172,19 @@ prompt_template = ChatPromptTemplate(
     ]
 )
 
-result = prompt_template.invoke({"msgs":[HumanMessage(content="hi!")]})
+result = prompt_template.invoke({"msgs": [HumanMessage(content="hi!")]})
 print(result)
 
 ```
+
 ### 模板组合
+
 ```python
-from langchain_core.messages import SystemMessage,HumanMessage,AIMessage
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
 sy = SystemMessage(
     content="你是一个起名大师",
-    additional_kwars={"大师姓名":"陈瞎子"}
+    additional_kwars={"大师姓名": "陈瞎子"}
 )
 
 hu = HumanMessage(
@@ -191,7 +195,7 @@ ai = AIMessage(
     content="我叫陈瞎子"
 )
 
-prompt = [sy,hu,ai]
+prompt = [sy, hu, ai]
 print(prompt)
 
 ```
@@ -248,8 +252,11 @@ few_shot_prompt = FewShotChatMessagePromptTemplate(
 
 print(few_shot_prompt.format())
 ```
+
 ## 解析器
+
 ### 字符串解析器StrOutputParser
+
 ```python
 from langchain_core.output_parsers import StrOutputParser
 # 字符串输出解析器
@@ -268,8 +275,8 @@ content = parser.invoke(response)
 print(content)
 ```
 
-
 ### json解析器JsonOutputParser
+
 ```python
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -303,8 +310,9 @@ print(json)
 ```
 
 ### json路径解析器get_format_instructions
+
 ```python
-from langchain_core.output_parsers import  JsonOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
@@ -319,13 +327,12 @@ llm = ChatOpenAI(
 parser = JsonOutputParser()
 prompt_template = PromptTemplate.from_template(
     template="回答用户的查询\n 满足的格式为{form_instructions}\n 问题为{question}\n",
-    partial_variables={"form_instructions":parser.get_format_instructions()}
+    partial_variables={"form_instructions": parser.get_format_instructions()}
 )
-
 
 joke_query = "告诉我一个笑话"
 
-prompt = prompt_template.invoke(input={"question":joke_query})
+prompt = prompt_template.invoke(input={"question": joke_query})
 response = llm.invoke(prompt)
 
 json_result = parser.invoke(response)
@@ -333,14 +340,15 @@ json_result = parser.invoke(response)
 print(json_result)
 
 ```
+
 ### 管道解析器
+
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.prompts import  PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
-
-llm  = ChatOpenAI(
+llm = ChatOpenAI(
     model="gpt-3.5-turbo-0613",
     temperature=0.9,
     api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
@@ -353,11 +361,44 @@ prompt_template = PromptTemplate.from_template(
     partial_variables={"form_instructions": parser.get_format_instructions()}
 )
 
-
 joke_query = "告诉我一个笑话"
 
 chain = prompt_template | llm | parser
-json_result = chain.invoke(input={"question":joke_query})
+json_result = chain.invoke(input={"question": joke_query})
 print(json_result)
+
+```
+
+### XMLOutputParser 解析器
+
+```python
+from langchain_core.output_parsers import XMLOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+actor_query = "周星驰的简短电影记录,使用中文回复"
+
+parser = XMLOutputParser()
+
+# 生成提示词模板
+prompt_template = PromptTemplate.from_template(
+    template="用户的问题:{query}\n便用的格式:{format_instructions}",
+    partial_variables={"query": actor_query}
+)
+
+prompt = prompt_template.partial(format_instructions=parser.get_format_instructions())
+
+response = llm.invoke(prompt.invoke(input={"query": actor_query}))
+
+xml_result = parser.invoke(response)
+
+print(xml_result)
+
 
 ```
