@@ -1,6 +1,5 @@
-from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-
+from langchain_core.output_parsers import  JsonOutputParser
+from langchain_core.prompts import  ChatPromptTemplate
 from langchain_openai import  ChatOpenAI
 
 llm = ChatOpenAI(
@@ -17,16 +16,19 @@ chat_prompt_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-
-prompt = chat_prompt_template.invoke(input={
-    "role":"人工智能专家",
-    "question":"人工智能用英文怎么说,问题用q表示，答案用a表示，返回一个json数据",
-})
+prompt = chat_prompt_template.invoke(
+    input={
+        "role":"人工智能专家",
+        "question":"人工智能用英文怎么说,问题用q表示，答案用a表示，返回一个json数据"
+    }
+)
 
 response = llm.invoke(prompt)
-
-
 parser = JsonOutputParser()
 json = parser.invoke(response)
+
 print(json)
+
+
+
 
