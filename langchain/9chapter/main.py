@@ -1,15 +1,15 @@
-from langchain_openai import ChatOpenAI
-
-
-api_key = "sk-ifGCp8P1b7mgq2AiJxLDDkZcCjF4KoukEEhzVfpzPufSBJQs"
-base_url = "https://poloai.top/v1"
-
-llm = ChatOpenAI(
-    model= "gpt-4o-mini",
-    api_key = api_key,
-    base_url = base_url,
+from langchain_deepseek import ChatDeepSeek
+llm = ChatDeepSeek(
+    model="deepseek-chat",
+    temperature=0,
+    api_key="sk-640be96306a64680985c02c88a4d685b",
+    base_url="https://deepseek.com/v1"
 )
 
-response = llm.invoke("什么是大模型")
-print(response)
+response = llm.invoke("deepseek 是不是很拉圾")
+print(response.content)
+
+
+
+
 
