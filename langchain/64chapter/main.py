@@ -1,12 +1,14 @@
+
+
 from langchain.prompts.chat import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_openai import  ChatOpenAI
 
-template = "你是一个翻译专家， 擅长将{input_language} 语言飜译成 {output_language}语言"
-
-chat_prompt = ChatPromptTemplate.from_messages([
-    ("system",template),
-    ("human","{text}")
-])
+chat_prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system","你是一个翻译专家， 擅长将{input_language} 语言飜译成 {output_language}语言"),
+        ("human","{text}")
+    ]
+)
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",
@@ -14,11 +16,16 @@ llm = ChatOpenAI(
     base_url="https://poloai.top/v1"
 )
 
-messages = chat_prompt.format_messages(input_language="英文",output_language="中文",text="I love large language Model.")
+messages = chat_prompt.format_messages(
+    input_language = "英文",
+    output_language = "中文",
+    text="I love large language Model."
+)
 
-response  = llm.invoke(messages)
+response = llm.invoke(messages)
 
 print(response.content)
+
 
 
 
