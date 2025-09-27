@@ -51,6 +51,15 @@
 # print(tensor.size())
 # print(tensor.dtype)
 
+import torch
+import numpy as np
+
+tensor2 = torch.Tensor(np.array([[1,2,3,4],[4,5,6,7]]))
+print(tensor2)
+print(tensor2.dtype)
+
+
+
 
 
 
