@@ -8,5 +8,7 @@ llm = ChatOpenAI(
 
 response = llm.invoke("写一首关于冬天的诗")
 print(response.content)
-print(type(response))
+
+
+
 
