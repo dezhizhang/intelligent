@@ -1,6 +1,7 @@
 
-from langchain.prompts import PromptTemplate
-from langchain_openai import  ChatOpenAI
+
+from langchain.prompts import  PromptTemplate
+from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",
@@ -15,8 +16,9 @@ template = PromptTemplate.from_template(
 prompt = template.invoke(input={"product":"智能手机","aspect1":"拍照质量"})
 
 response = llm.invoke(prompt)
-
 print(response)
+
+
 
 
 
