@@ -78,7 +78,9 @@ prompt_template = PromptTemplate(
 prompt = prompt_template.format(role="人工智能专家", name="数擎科技")
 print(prompt)
 ```
+
 ### 提示词结合大模型调用
+
 ```python
 from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
@@ -99,7 +101,9 @@ response = llm.invoke(prompt)
 
 print(response)
 ```
+
 ### from_messages 提示调模板
+
 ```python
 
 
@@ -114,34 +118,54 @@ llm = ChatOpenAI(
 
 template = ChatPromptTemplate.from_messages(
     [
-        ("system","你是一个AI助手,你的名字叫{name}"),
-        ("human","我的问题是{question}")
+        ("system", "你是一个AI助手,你的名字叫{name}"),
+        ("human", "我的问题是{question}")
     ]
 )
 
-
-prompt = template.invoke({"name":"贵州数擎科技有限公司","question":"1 + 2 * 3 = ?"})
+prompt = template.invoke({"name": "贵州数擎科技有限公司", "question": "1 + 2 * 3 = ?"})
 response = llm.invoke(prompt)
 print(response)
 
 ```
+
 ### MessagesPlaceholder
+
 ```python
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.prompts.chat import  MessagesPlaceholder
+from langchain_core.prompts.chat import MessagesPlaceholder
 
 chat_prompt_template = ChatPromptTemplate.from_messages([
-    ("system","你是一个Ai助手，你的名字叫{name}"),
+    ("system", "你是一个Ai助手，你的名字叫{name}"),
     MessagesPlaceholder(variable_name="msgs")
 ])
 
-
 prompt = chat_prompt_template.invoke({
-    "name":"数擎科技",
-    "msgs":[HumanMessage(content="我的问题是 1 + 2 * 3 = ?")]
+    "name": "数擎科技",
+    "msgs": [HumanMessage(content="我的问题是 1 + 2 * 3 = ?")]
 })
 
 print(prompt)
 
+```
+
+### StrOutputParser 字符串解析器
+
+```python
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+response = llm.invoke("什么是大模型")
+parser = StrOutputParser()
+
+string = parser.invoke(response)
+
+print(string)
 ```
