@@ -78,3 +78,24 @@ prompt_template = PromptTemplate(
 prompt = prompt_template.format(role="人工智能专家", name="数擎科技")
 print(prompt)
 ```
+### 提示词结合大模型调用
+```python
+from langchain.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+template = PromptTemplate.from_template(
+    template="请评价{product}的优点,包括{aspect1}"
+)
+
+prompt = template.invoke(input={"product": "智能手机", "aspect1": "拍照质量"})
+
+response = llm.invoke(prompt)
+
+print(response)
+```
