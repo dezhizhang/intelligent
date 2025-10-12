@@ -85,3 +85,62 @@ print(np.isnan([1, 2, np.nan]))
 
 ## 统计函数
 
+### 1 求和
+
+```python
+
+import numpy as np
+
+arr = np.random.randint(1, 20, 8)
+print(np.sum(arr))
+```
+
+### 2 平均值
+
+```python
+
+import numpy as np
+
+arr = np.random.randint(1, 20, 8)
+print(np.mean(arr))
+```
+
+### 3 中位数
+
+```python
+import numpy as np
+
+print(np.median([1, 2, 3, 4, 5]))
+```
+
+### 4 标准差
+
+```python
+import numpy as np
+
+print(np.var([1, 2, 3]))
+```
+
+## 排序函数
+
+### 1 按从小到大排序
+
+```python
+import numpy as np
+
+np.random.seed(0)
+
+arr = np.random.randint(1, 100, 20)
+
+print(np.sort(arr))
+```
+### 2 去重函数
+```python
+import numpy as np
+
+np.random.seed(0)
+arr = np.random.randint(1, 100, 20)
+print(np.unique(arr))
+
+```
+
