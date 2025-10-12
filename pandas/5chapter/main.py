@@ -17,8 +17,10 @@
 import pandas as pd
 
 s1 = pd.Series([1,2,3,4])
-s2 = pd.Series([5,6,7,8])
 
-df = pd.DataFrame({"第1列":s1,"第2列":s2})
-print(df)
+# print(s1[s1 < 3])
+print(s1.head())
+print(s1.tail())
+
+
 
