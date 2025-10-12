@@ -1,12 +1,6 @@
-import numpy as np
 
-# arr = np.array([1,0,1,0],dtype='bool')
-# print(arr)
+import  numpy as np
 
-# arr = np.array([1,0,1,0],dtype="bool")
-# print(arr)
-
-arr = np.array([1,0,1,0],dtype='bool')
+arr = np.array([1,127,2,0],dtype=np.int8)
 print(arr)
-
 
