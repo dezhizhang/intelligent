@@ -1,17 +1,44 @@
 # import torch
 #
-# dev = torch.device("cpu")
-# a = torch.tensor([2,2],dtype=torch.float64,device=dev)
-#
+# a = torch.rand(2,1,1) + torch.rand(3)
 # print(a)
+#
+
+# a = torch.rand(2,3)
+# b = torch.rand(3)
+#
+# c = a + b
+# print(a)
+
+# import torch
+#
+# a = torch.rand(2,3)
+# b = torch.rand(3)
+#
+# c = a + b
+# print(c)
+# print(c.shape)
+
+# import torch
+#
+# a = torch.rand(2,3)
+# b = torch.rand(3)
+#
+# c = a + b
+# print(c)
+# print(c.shape)
 
 import torch
 
-dev = torch.device("cpu")
+a = torch.rand(2,3)
+b = torch.rand(3)
 
-i = torch.tensor([[0,1,2],[0,1,2]])
-v = torch.tensor([1,2,3])
-a = torch.sparse_coo_tensor(i,v,(4,4)).to_sparse()
+c = a + b
+print(c)
+print(c.shape)
 
-print(a)
+
+
+
+
 
