@@ -1,55 +1,37 @@
-import numpy as np
 
+# import  numpy as np
 #
-# import numpy as np
-
-# import numpy as np
-#
-# num = np.sqrt(9)
-# print(num)
+# print(np.sqrt(9))
+# print(np.sqrt([1,4,9]))
 
 # import numpy as np
 #
-# num = np.sqrt(9)
-# print(num)
+# print(np.exp(0))
 
-# import numpy as np
+# import  numpy as np
 #
-# num = np.sqrt(9)
-# print(num)
+# print(np.exp(0))
 
-# import numpy as np
+# import  numpy as np
 #
-# print(np.exp(1))
+# print(np.log(2.71828))
 
+# 计算正值
 # import numpy as np
-#
-# print(np.exp(1))
+# print(np.sin(np.pi / 2))
 
+# 计算正值
 # import numpy as np
-#
-# print(np.exp(1))
+# print(np.sin(np.pi / 2))
+
+# 计算绝对值
 # import numpy as np
-#
-# arr = np.array([-1,1,2,-3])
-# print(np.abs(arr))
-
-# import numpy as np
-#
-# arr = np.array([-1,1,2,-3])
-# print(np.abs(arr))
-
-
-# import numpy as np
-#
-# arr = np.array([-1,1,2,-3])
-# print(np.abs(arr))
-
+# print(np.abs(-1))
 
 # 四舍五入
-# print(np.round([3.2,4.57,8.1,9.6]))
+import numpy as np
 
-print(np.round([3.2,4.57]))
+print(np.round([3.2,4.5,8.1,9.6]))
 
 
 
