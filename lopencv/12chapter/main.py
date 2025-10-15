@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = cv2.imread("../14chapter/img.png")
+img = cv2.imread("../15chapter/img.png")
 
 kernel = np.ones((3,3),np.uint8)
 dige_erosion = cv2.erode(img,kernel,iterations=1)

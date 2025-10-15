@@ -2,7 +2,7 @@ import cv2
 
 import numpy as np
 
-img = cv2.imread("img.png")
+img = cv2.imread("../15chapter/img.png")
 kernel = np.ones((7,7),np.uint8)
 
 dilate = cv2.dilate(img,kernel,iterations=5)
