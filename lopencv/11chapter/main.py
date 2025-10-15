@@ -12,3 +12,4 @@ img = cv.addWeighted(view,0.7,rain,0.3,0)
 plt.figure(figsize=(8,8))
 plt.imshow(img[:,:,::-1])
 plt.show()
+
