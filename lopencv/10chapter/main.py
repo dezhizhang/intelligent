@@ -1,20 +1,18 @@
-# import cv2
-#
-# img = cv2.imread("img.png")
-#
-# gaussian = cv2.GaussianBlur(img,(5,5),1)
-# cv2.imshow("gaussian",gaussian)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
 
-import  cv2
+import cv2 as cv
+import matplotlib.pyplot as plt
 
-img = cv2.imread("../11chapter/img.png")
+rain = cv.imread("rain.jpg")
+view = cv.imread("view.jpg")
 
-gaussian = cv2.GaussianBlur(img,(5,5),1)
-cv2.imshow("gaussian",gaussian)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+img = cv.add(rain,view)
+
+plt.imshow(img[:,:,::-1])
+plt.show()
+
+
+
+
 
 
 

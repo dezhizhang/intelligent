@@ -97,3 +97,37 @@ plt.imshow(img2[:, :, ::-1])
 plt.show()
 
 ```
+### 图像的加法操作
+```python
+
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+rain = cv.imread("rain.jpg")
+
+view = cv.imread("view.jpg")
+
+img1 = cv.add(rain, view)
+
+plt.imshow(img1[:, :, ::-1])
+plt.show()
+
+```
+### 图像的混合
+```python
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+# 读取图像
+view = cv.imread("view.jpg")
+rain = cv.imread("rain.jpg")
+
+# 图像混合
+img = cv.addWeighted(view, 0.7, rain, 0.3, 0)
+
+# 图像的显示
+plt.figure(figsize=(8, 8))
+plt.imshow(img[:, :, ::-1])
+plt.show()
+
+```

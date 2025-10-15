@@ -1,28 +1,14 @@
-# import cv2
-# import numpy as np
-#
-# img = cv2.imread("img.png")
-#
-# kernel = np.ones((5,5),np.uint8)
-# erosion = cv2.erode(img,kernel,iterations=1)
-#
-# cv2.imshow("erosion",erosion)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+import cv2 as cv
+import matplotlib.pyplot as plt
 
-import cv2
+# 读取图像
+view = cv.imread("view.jpg")
+rain = cv.imread("rain.jpg")
 
-import numpy as np
+# 图像混合
+img = cv.addWeighted(view,0.7,rain,0.3,0)
 
-img = cv2.imread("img.png")
-
-kernel = np.ones((5,5),np.uint8)
-erosion = cv2.erode(img,kernel,iterations=1)
-
-cv2.imshow("erosion",erosion)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-
-
+# 图像的显示
+plt.figure(figsize=(8,8))
+plt.imshow(img[:,:,::-1])
+plt.show()
