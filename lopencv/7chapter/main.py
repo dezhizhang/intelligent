@@ -1,28 +1,3 @@
-# opencv
-
-## opencv的安装
-
-```bash
-pip install opencv-python
-pip install opencv-contrib-python
-```
-###  图像的io操作
-```python
-import cv2 as cv
-
-# 读取图像
-img = cv.imread("img.png", 0)
-# 显示图像
-cv.imshow("img", img)
-# 等待时间
-cv.waitKey(0)
-# 保存图像
-cv.imwrite("test.png", img)
-cv.destroyAllWindows()
-
-```
-### 图像上绘制图形
-```python
 import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
@@ -37,10 +12,9 @@ cv.circle(img,(447,63),63,(0,0,255),-1)
 font = cv.FONT_HERSHEY_SIMPLEX
 cv.putText(img,"opencv",(10,500),font,4,(255,255,255),2,cv.LINE_AA)
 
-
-# 图像显示
+# 3 图像显示
 plt.imshow(img[:,:,::-1])
 plt.title('draw'),plt.xticks([]),plt.yticks([])
 plt.show()
 
-```
+
