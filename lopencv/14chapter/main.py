@@ -1,16 +1,20 @@
-import cv2
 
-import numpy as np
+import cv2 as cv
+import matplotlib.pyplot as plt
 
-img = cv2.imread("../15chapter/img.png")
-kernel = np.ones((7,7),np.uint8)
+img = cv.imread("img.png")
 
-dilate = cv2.dilate(img,kernel,iterations=5)
-erosion = cv2.erode(img,kernel,iterations=5)
+# 图像旋转
+rows,cols = img.shape[:2]
+# 生成旋转矩阵
+matr = cv.getRotationMatrix2D((cols/2,rows/2),90,1)
+# 进行旋转变换
+dst = cv.warpAffine(img,matr,(cols,rows))
 
-res = np.hstack((dilate,erosion))
-
-cv2.imshow("res",res)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+# 显示图像
+fig,axes = plt.subplots(nrows=1,ncols=2,figsize=(10,8),dpi=100)
+axes[0].imshow(img[:,:,::-1])
+axes[0].set_title("origin")
+axes[1].imshow(dst[:,:,::-1])
+axes[1].set_title("rotate")
+plt.show()
