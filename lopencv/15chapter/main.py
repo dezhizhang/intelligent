@@ -1,4 +1,3 @@
-
 import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
@@ -12,7 +11,6 @@ rows,cols = img.shape[:2]
 # 创建变换矩阵
 pst1 = np.float32([[50,50],[200,50],[50,200]])
 pst2 = np.float32([[100,100],[200,50],[100,250]])
-
 matrix = cv.getAffineTransform(pst1,pst2)
 # 完成防射变换
 dst = cv.warpAffine(img,matrix,(cols,rows))
