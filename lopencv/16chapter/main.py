@@ -12,6 +12,7 @@ pst1 = np.float32([[56,65],[368,52],[28,387],[389,390]])
 pst2 = np.float32([[100,145],[300,100],[80,290],[310,300]])
 
 matrix = cv.getPerspectiveTransform(pst1,pst2)
+
 # 进行变换
 dst = cv.warpPerspective(img,matrix,(cols,rows))
 
