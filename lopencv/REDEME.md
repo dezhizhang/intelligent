@@ -342,3 +342,46 @@ axes[1, 1].set_title("close")
 plt.show()
 
 ```
+### 均值滤波
+```python
+import numpy as np
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+dogsp = cv.imread("dogsp.jpeg")
+
+doggau = cv.imread("dogGauss.jpeg")
+
+# 均值滤波
+dog = cv.blur(dogsp, (5, 5))
+plt.imshow(dog[:, :, ::-1])
+plt.show()
+
+```
+### 高斯滤波
+```python
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+dogGauss = cv.imread("dogGauss.jpeg")
+
+dog = cv.GaussianBlur(dogGauss, (3, 3), 1)
+plt.imshow(dog[:, :, ::-1])
+plt.show()
+
+```
+### 中值滤波
+```python
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+dogsp = cv.imread("dogsp.jpeg")
+
+# 中值滤
+dog = cv.medianBlur(dogsp, 3)
+
+# 显示图像
+plt.imshow(dog[:, :, ::-1])
+plt.show()
+
+```
