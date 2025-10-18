@@ -21,10 +21,15 @@ plt.title("origin")
 plt.xticks([])
 plt.yticks([])
 
-plt.subplot(122),
+plt.subplot(122)
 plt.imshow(result,cmap=plt.cm.gray)
 plt.title("result")
 plt.xticks([])
 plt.yticks([])
 plt.show()
+
+
+
+
+
 
