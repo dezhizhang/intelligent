@@ -243,6 +243,7 @@ plt.show()
 ```
 
 ### 图像的透射变换
+
 ```python
 import numpy as np
 import cv2 as cv
@@ -270,7 +271,9 @@ axes[1].set_title("opacity")
 plt.show()
 
 ```
+
 ### 图像金字塔
+
 ```python
 import numpy as np
 import cv2 as cv
@@ -289,7 +292,9 @@ cv.waitKey(0)
 cv.destroyAllWindows()
 
 ```
+
 ### 膨胀与腐蚀
+
 ```python
 import numpy as np
 import cv2 as cv
@@ -315,7 +320,9 @@ plt.show()
 
 
 ```
+
 ### 图像的开闭运算
+
 ```python
 import cv2 as cv
 import numpy as np
@@ -342,7 +349,9 @@ axes[1, 1].set_title("close")
 plt.show()
 
 ```
+
 ### 均值滤波
+
 ```python
 import numpy as np
 import cv2 as cv
@@ -358,7 +367,9 @@ plt.imshow(dog[:, :, ::-1])
 plt.show()
 
 ```
+
 ### 高斯滤波
+
 ```python
 import cv2 as cv
 import matplotlib.pyplot as plt
@@ -370,7 +381,9 @@ plt.imshow(dog[:, :, ::-1])
 plt.show()
 
 ```
+
 ### 中值滤波
+
 ```python
 import cv2 as cv
 import matplotlib.pyplot as plt
@@ -385,7 +398,9 @@ plt.imshow(dog[:, :, ::-1])
 plt.show()
 
 ```
+
 ### 直方图
+
 ```python
 import numpy as np
 import cv2 as cv
@@ -402,36 +417,39 @@ plt.grid()
 plt.show()
 
 ```
+
 ### 掩膜的应用
+
 ```python
 import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
 
 img = cv.imread("cat.jpeg")
-mask = np.zeros(img.shape[:2],np.uint8)
-mask[400:650,200:500] = 255
+mask = np.zeros(img.shape[:2], np.uint8)
+mask[400:650, 200:500] = 255
 
-mask_img = cv.bitwise_and(img,img,mask=mask)
+mask_img = cv.bitwise_and(img, img, mask=mask)
 
-mask_histr = cv.calcHist([img],[0],mask,[256],[1,256])
+mask_histr = cv.calcHist([img], [0], mask, [256], [1, 256])
 
 # 显示图像
-fig,axes = plt.subplots(nrows=2,ncols=2,figsize=(10,8))
-axes[0,0].imshow(img,cmap=plt.cm.gray)
-axes[0,0].set_title("origin")
-axes[0,1].imshow(mask,cmap=plt.cm.gray)
-axes[0,1].set_title("mask")
-axes[1,0].imshow(mask_img,cmap=plt.cm.gray)
-axes[1,1].plot(mask_histr)
-axes[1,1].grid()
-axes[1,1].set_title('grid')
-
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 8))
+axes[0, 0].imshow(img, cmap=plt.cm.gray)
+axes[0, 0].set_title("origin")
+axes[0, 1].imshow(mask, cmap=plt.cm.gray)
+axes[0, 1].set_title("mask")
+axes[1, 0].imshow(mask_img, cmap=plt.cm.gray)
+axes[1, 1].plot(mask_histr)
+axes[1, 1].grid()
+axes[1, 1].set_title('grid')
 
 plt.show()
 
 ```
+
 ### 直方向均化
+
 ```python
 import numpy as np
 import cv2 as cv
@@ -449,5 +467,27 @@ axes[1].imshow(dst, cmap=plt.cm.gray)
 axes[1].set_title("equalize")
 plt.show()
 
+
+```
+
+### 自适应均衡化
+
+```python
+import numpy as np
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+img = cv.imread("cat.jpeg", 0)
+
+clahe = cv.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+cl1 = clahe.apply(img)
+
+# 显示图像
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 8), dpi=100)
+axes[0].imshow(img, cmap=plt.cm.gray)
+axes[0].set_title("origin")
+axes[1].imshow(cl1, cmap=plt.cm.gray)
+axes[1].set_title("clahe")
+plt.show()
 
 ```
