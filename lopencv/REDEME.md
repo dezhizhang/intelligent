@@ -555,7 +555,9 @@ plt.yticks([])
 plt.show()
 
 ```
+
 ### 模板匹配
+
 ```python
 import cv2 as cv
 import numpy as np
@@ -579,6 +581,78 @@ plt.imshow(img[:, :, ::-1])
 plt.title("result")
 plt.xticks([])
 plt.xticks([])
+plt.show()
+
+```
+
+### 霍夫线检测
+
+```python
+import numpy as np
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+# 线检测
+img = cv.imread("rili.jpg", 0)
+edges = cv.Canny(img, 50, 150)
+
+lines = cv.HoughLines(edges, 0.8, np.pi / 180, 150)
+# 先转成彩色图方便画线
+color_img = cv.cvtColor(img, cv.COLOR_GRAY2BGR)
+
+for line in lines:
+    rho, theta = line[0]
+    a = np.cos(theta)
+    b = np.sin(theta)
+
+    x0 = rho * a
+    y0 = rho * b
+
+    x1 = int(x0 + 1000 * (-b))
+    y1 = int(y0 + 1000 * a)
+
+    x2 = int(x0 - 1000 * (-b))
+    y2 = int(y0 - 1000 * a)
+
+    cv.line(color_img, (x1, y1), (x2, y2), (0, 255, 0))
+
+plt.imshow(cv.cvtColor(color_img, cv.COLOR_BGR2RGB))
+plt.show()
+
+```
+
+### 霍夫圆检测
+
+```python
+import cv2 as cv
+import matplotlib.pyplot as plt
+import numpy as np
+
+star = cv.imread("star.jpeg")
+gray_img = cv.cvtColor(star, cv.COLOR_BGR2GRAY)
+
+img = cv.medianBlur(gray_img, 7)
+
+circles = cv.HoughCircles(
+    img,
+    cv.HOUGH_GRADIENT,
+    dp=1,
+    minDist=200,
+    param1=100,
+    param2=50,
+    minRadius=0,
+    maxRadius=100
+)
+
+if circles is not None:
+    circles = np.uint16(np.around(circles))  # 转为整数方便绘制
+    for i in circles[0, :]:
+        # 画圆
+        cv.circle(star, (i[0], i[1]), i[2], (0, 255, 0), 2)
+        # 画圆心
+        cv.circle(star, (i[0], i[1]), 2, (0, 0, 255), 3)
+
+plt.imshow(cv.cvtColor(star, cv.COLOR_BGR2RGB))
 plt.show()
 
 ```
