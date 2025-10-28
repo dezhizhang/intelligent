@@ -13,10 +13,6 @@ conn = Connection(
 cursor = conn.cursor()
 conn.select_db("box")
 
-# # 执行sql
-# cursor.execute("create table test(id int);")
-
-# 查询功能
 cursor.execute("select * from user")
 
 result = cursor.fetchall()
