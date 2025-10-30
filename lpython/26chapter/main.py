@@ -1,13 +1,36 @@
-# name = "贵州数擎科技有限公司"
-# setup_year = 2024
-# stock_price = 19.99
+# n1 = 4.5
+# n2 = -3.6
+# print("n1=",n1)
+# print("n2=",n2)
+
+# n5=5.12e2
+# print("n5=",n5)
+
+# n5 = 5.12e2
+# n6=5.12E-2
+# print("n5",n5)
+# print("n6",n6)
+
+# n5 = 5.12e2
+# n6=51.2E-2
+# print("n5",n5)
+# print("n6",n6)
+
+# import sys
 #
-# print(f"我是{name} 成立于{setup_year} 股票价{stock_price}")
+# print(sys.float_info)
 
-# print(f"1 * 2 的结果是{1 * 2}")
+# b = 8.1 / 3
+# print(b)
 
-# print(f"1 * 2 的结果是{1 * 2}")
+from decimal import  Decimal
 
-print(f"1 * 2 的结果是{1 * 2}")
+b = 8.1 / 3
+print(Decimal('8.1') / Decimal('3'))
+
+
+
+
+
 
 
