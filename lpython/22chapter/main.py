@@ -1,14 +1,21 @@
 
-
-# name1 = "贵州"
-# name2 = "数擎科技有限公司"
+# name = "tom"
+# gender = 1
 #
-# print(name1 + name2)
+# print("个人信息: {} {}".format(name,gender))
+#
+
+# name = "tom"
+# age = 22
+#
+# print(f"个人信息{name} {age}")
+
+# name = "tom"
+# age = 22
+# print(f"个人信息{name} {age}")
 
 name = "tom"
-phone = 15992478448
-
-print("姓名:" + name + str(phone))
-
+age = 22
+print(f"个人信息{name} {age}")
 
 
