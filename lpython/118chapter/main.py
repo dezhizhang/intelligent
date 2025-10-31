@@ -1,17 +1,22 @@
 
-class Phone:
-    imei = None
-    producer = None
+class Clerk:
+    name = None
+    __job = None
+    __salary = None
 
-    def call_by_4g(self):
-        print("4g通话")
+    def __init__(self,name,job,salary):
+        self.name = name
+        self.__job = job
+        self.__salary = salary
 
-class Phone2022(Phone):
-    face_id = True
+    def getJob(self):
+        return self.__job
 
-    def call_by_5g(self):
-        print("2025最新5g通话")
+    def getSlary(self):
+        return self.__salary
 
-phone2022 = Phone2022()
-phone2022.call_by_4g()
-phone2022.call_by_5g()
+clerk = Clerk("tom","前端开发",100)
+print(clerk.getSlary())
+print(clerk.getJob())
+
+

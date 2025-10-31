@@ -1,13 +1,23 @@
-class Student:
+# class Cat:
+#     name = None
+#     age = None
+#
+#     def __init__(self,name,age):
+#         self.name = name
+#         self.age = age
+#
+
+
+class Person:
     def __init__(self,name,age):
+        print(f"__init__执行了...{name}{age}")
         self.name = name
         self.age = age
 
-    def __str__(self):
-        return f"name={self.name},age={self.age}"
+p1 = Person("tom",22)
 
-stu = Student("周杰伦",31)
-print(stu.name)
+print(p1.name)
+print(p1.age)
 
 
 

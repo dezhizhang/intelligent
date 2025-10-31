@@ -1,12 +1,11 @@
-class Student:
+class Cat:
     name = None
     age = None
-    tel = None
-    def __init__(self,name,age,tel):
-        self.name = name
-        self.age = age
-        self.tel = tel
+    def hi(self):
+        name = "皮皮"
+        print(f"name={name}")
+        print(f"name={self.name}")
 
-stu = Student("张德志",32,"15992478448")
-print(stu.name)
 
+cat = Cat()
+cat.hi()

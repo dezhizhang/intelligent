@@ -1,18 +1,23 @@
 
+class Clerk:
+    name = None
+    __job = None
+    __salary = None
 
-class Phone:
+    def __init__(self,name,job,salary):
+        self.name = name
+        self.__job = job
+        self.__salary = salary
 
-    __current_voltage = 1
+    def getJob(self):
+        return self.__job
 
-    def __keep_single_core(self):
-        print("单核cpu运行模式")
+    def getSalary(self):
+        return self.__salary
 
-    def call_by_5g(self):
-        if self.__current_voltage >=1:
-            print("5g通话已开启")
-        else:
-            self.__keep_single_core()
-            print("电量不足，无法使用5g通话")
 
-phone = Phone()
-phone.call_by_5g()
+clerk  = Clerk("tom","前端工程师",1000)
+print(clerk.getJob())
+print(clerk.getSalary())
+
+
