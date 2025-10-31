@@ -1,14 +1,33 @@
-class Student:
+
+def cal01():
+    sum = 0
+    for i in range(1,1001):
+        sum += i
+    print(sum)
+
+def hi():
+    print("hi python")
+
+class Person:
     name = None
-    gender = None
     age = None
 
 
-stu = Student()
-stu.name = "tom"
-stu.age = 22
-stu.gender = "男"
+p = Person()
+p.cal01 = cal01
+p.hi = hi
 
-print(stu.name)
+
+p.hi()
+p.cal01()
+
+
+
+
+
+
+
+
+
 
 
