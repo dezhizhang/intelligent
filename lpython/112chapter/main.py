@@ -1,10 +1,19 @@
-class Student:
+
+class Person:
     name = None
-    def say_hi(self,msg):
-        print(f"{self.name} {msg}")
+    age = None
 
-stu = Student()
-stu.name = "tom"
-stu.say_hi("hello")
+    def compare_to(self,other):
+        return self.name == other.name and self.age == other.age
 
+
+p = Person()
+p.name = "tom"
+p.age = 3
+
+p2 = Person()
+p2.name = "jack"
+p2.age = 4
+
+print(p.compare_to(p2))
 

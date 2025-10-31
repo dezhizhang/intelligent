@@ -12,6 +12,9 @@ class Person:
     name = None
     age = None
 
+    def ok(self):
+        print("ok")
+
 
 p = Person()
 p.cal01 = cal01
@@ -20,6 +23,10 @@ p.hi = hi
 
 p.hi()
 p.cal01()
+
+print(type(p.hi))
+print(type(p.ok()))
+
 
 
 
