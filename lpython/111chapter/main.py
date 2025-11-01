@@ -1,31 +1,71 @@
+# class Person:
+#     name = None
+#     age = None
+#
+#     def hi(self):
+#         print("python")
+#
+#     def cal01(self):
+#         result = 0
+#         for i in range(1,1001):
+#             result+=i
+#         print("result=",result)
+#
+#     def get_sum(self,n1,n2):
+#         return n1 + n2
+#
+#
+#
+# p = Person()
+# p.hi()
+# p.cal01()
+# p.get_sum(10,20)
 
-def cal01():
-    sum = 0
-    for i in range(1,1001):
-        sum += i
-    print(sum)
-
-def hi():
-    print("hi python")
+# class Person:
+#     name = None
+#     age = None
+#
+#     def hi(self):
+#         print("python")
+#
+#     def cal01(self):
+#         result = 0
+#         for i in range(1,1001):
+#             result += i
+#         print("result",result)
+#
+#     def get_sum(self,n1,n2):
+#         return n1 + n2
+#
+#
+# p = Person()
+# p.hi()
+# p.cal01()
+# p.get_sum(10,20)
 
 class Person:
     name = None
     age = None
 
-    def ok(self):
-        print("ok")
+    def hi(self):
+        print("python")
 
+    def cal01(self):
+        result = 0
+        for i in range(1,1001):
+            result += i
+        print("result",result)
+
+    def get_sum(self,n1,n2):
+        return n1 + n2
 
 p = Person()
-p.cal01 = cal01
-p.hi = hi
-
-
 p.hi()
 p.cal01()
+p.get_sum(10,20)
 
-print(type(p.hi))
-print(type(p.ok()))
+
+
 
 
 
