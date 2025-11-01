@@ -1,23 +1,19 @@
 
-class Animal:
-    def speak(self):
-        pass
+class A:
+    n1 = 100
 
-class Dog(Animal):
-    def speak(self):
-        print("汪汪汪")
+    def run(self):
+        print("a run...")
+
+class B(A):
+    n1 = 200
+
+    def say(self):
+        print(f"父类的n1{A.n1} 本类的n1:{self.n1}")
+        A.run(self)
+
+b = B()
+b.say()
 
 
-class Cat(Animal):
-    def speak(self):
-        print("喵喵喵")
-
-
-def make_noise(animal:Animal):
-    animal.speak()
-
-dog = Dog()
-cat = Cat()
-make_noise(dog)
-make_noise(cat)
 
