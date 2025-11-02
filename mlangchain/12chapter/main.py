@@ -1,40 +1,18 @@
-# from langchain_openai import ChatOpenAI
-#
-# llm = ChatOpenAI(
-#     model="gpt-4o-mini",
-#     api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
-#     base_url="https://poloai.top/v1"
-# )
-#
-# response = llm.invoke("帮我解释一下什么是大模型langchain")
-# print(response.content)
-# print(type(response))
 
-# from langchain_openai import ChatOpenAI
-#
-# llm = ChatOpenAI(
-#     model="gpt-4o-mini",
-#     api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
-#     base_url="https://poloai.top/v1",
-# )
-#
-# response = llm.invoke("帮我解释一下什么是大模型langchain")
-# print(response.content)
-# print(type(response))
+from langchain_openai import ChatOpenAI
+import os
+import dotenv
 
-
-from langchain_openai import  ChatOpenAI
+dotenv.load_dotenv()
 
 llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
-    base_url="https://poloai.top/v1"
+    model=os.getenv("OPENAI_BASE_MODEL"),
+    base_url=os.getenv("OPENAI_BASE_URL"),
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
-response = llm.invoke("帮我解释一下什么是大模型langchain")
+response = llm.invoke("什么是langchain")
 print(response.content)
-print(type(response))
-
 
 
 
