@@ -1,5 +1,5 @@
-from langchain_core.messages import SystemMessage,HumanMessage
 from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage,HumanMessage
 
 llm = ChatOpenAI(
     model="gpt-4",
@@ -8,16 +8,11 @@ llm = ChatOpenAI(
 )
 
 messages = [
-    SystemMessage(content="我是人工智能助手,我叫晓智"),
-    HumanMessage(content="你好，我是小明，很高兴认识你")
+    SystemMessage(content="我是人工智能助手,我的名字叫数擎Ai"),
+    HumanMessage(content="你好，我是晓智，很高兴认识你")
 ]
 
 response = llm.invoke(messages)
 print(response.content)
-
-
-
-
-
 
 
