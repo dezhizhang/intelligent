@@ -10,7 +10,7 @@ llm = ChatOpenAI(
 
 actor_query = "生成汤姆 汉克斯的简短电影记录，使用中文回复"
 
-parser = XMLOutputParser()
+parser = JsonOutputParser()
 
 prompt_template1 = ChatPromptTemplate.from_template(
     template="用户的问题:{query}\n使用的格式{format_instructions}"
