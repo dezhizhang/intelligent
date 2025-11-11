@@ -45,7 +45,30 @@ def dm03_show_iris():
     print(f"训练集特征:{x_train} 个数{len(x_train)}")
     print(f"测试集特征:{x_test} 个数{len(x_test)}")
 
+def dm04_show_iris():
+    # 1. 加载数据集
+    iris_data = load_iris()
+    # 2. 数据的预处理
+    x_train, x_test, y_train, y_test = train_test_split(iris_data.data, iris_data.target, test_size=0.2,
+                                                            random_state=23)
+    # 3.特征工程
+    transfer = StandardScaler()
+    x_train = transfer.fit_transform(x_train)
+    x_test = transfer.transform(x_test)
+
+    # 4. 创建模型对像
+    estimator = KNeighborsClassifier(n_neighbors=3)
+    estimator.fit(x_train,y_train)
+    # 5. 模型预测
+    y_pre = estimator.predict(x_test)
+    print(y_pre)
+
+    # 模型评估
+    print(f'正确率:{estimator.score(x_train,y_train)}')
+    print(f'正确率真:{accuracy_score(y_test,y_pre)}')
+
+
 
 
 if __name__ == "__main__":
-    dm03_show_iris()
+    dm04_show_iris()
