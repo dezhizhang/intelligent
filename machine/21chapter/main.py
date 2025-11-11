@@ -2,6 +2,7 @@ from sklearn.datasets import load_iris
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
@@ -36,8 +37,15 @@ def dm02_show_iris():
     plt.show()
 
 
+def dm03_show_iris():
+    # 加载数据
+    iris_data = load_iris()
+    # 数据预处理
+    x_train,x_test,y_train,y_test = train_test_split(iris_data.data,iris_data.target,test_size=0.2,random_state=23)
+    print(f"训练集特征:{x_train} 个数{len(x_train)}")
+    print(f"测试集特征:{x_test} 个数{len(x_test)}")
 
 
 
 if __name__ == "__main__":
-    dm02_show_iris()
+    dm03_show_iris()
