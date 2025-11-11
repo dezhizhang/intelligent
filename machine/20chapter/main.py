@@ -1,5 +1,4 @@
-from sklearn.preprocessing import StandardScaler
-
+from sklearn.preprocessing import  StandardScaler
 x_train = [
     [90, 3, 10, 40],
     [60, 4, 15, 45],
