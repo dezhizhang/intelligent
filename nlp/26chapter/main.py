@@ -29,11 +29,15 @@ def dm02_embedding_show():
     embed = nn.Embedding(num_embeddings=len(words),embedding_dim=8)
 
 
-    summarywriter = SummaryWriter()
-    summarywriter.add_embedding(embed.weight,words)
-    summarywriter.close()
+    # summarywriter = SummaryWriter()
+    # summarywriter.add_embedding(embed.weight,words)
+    # summarywriter.close()
 
-    print(f"embed->{embed.weight}")
+    for idx in range (len(tokenizer.index_word)):
+        output = embed(torch.tensor(idx))
+        print(f"output-> {output}")
+        break
+
 
 
 
