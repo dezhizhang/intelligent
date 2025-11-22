@@ -1,38 +1,33 @@
 # import torch
-#
-# a = torch.ones(2,3)
-# b = torch.ones(2,3)
-#
+
+# print(a)
+# print(b)
+
 # print(torch.eq(a,b))
 # print(torch.equal(a,b))
+#
+#
 # print(torch.ge(a,b))
 # print(torch.gt(a,b))
+# print(torch.le(a,b))
 # print(torch.lt(a,b))
-# print(torch.ne(a,b))
+# import torch
+# a = torch.tensor([1,4,4,3,5])
+# print(torch.sort(a,descending=True))
 
 # import torch
-#
-# a = torch.ones(2,3)
-# b = torch.ones(2,3)
-#
-# print(torch.eq(a,b))
-# print(torch.equal(a,b))
-# print(torch.ge(a,b))
-# print(torch.gt(a,b))
-# print(torch.lt(a,b))
-# print(torch.ne(a,b))
-
+# a = torch.tensor([1,4,4,3,5])
+# print(torch.sort(a,descending=True))
 
 # import torch
-# a = torch.tensor([
-#     [2,4,3,1,5],
-#     [2,3,5,1,4]
-# ])
-# print(a.shape)
-# print(torch.topk(a,k=2,dim=0))
-#
+# a = torch.tensor([1,4,3,2,5])
+# print(torch.sort(a,descending=True))
+
 # import torch
-#
+# a = torch.tensor([1,4,3,2,5])
+# print(torch.sort(a,descending=True))
+
+# import torch
 # a = torch.tensor([
 #     [2,4,3,1,5],
 #     [2,3,5,1,4]
@@ -40,7 +35,7 @@
 #
 # print(a.shape)
 # print(torch.topk(a,k=2,dim=0))
-#
+
 # import torch
 #
 # a = torch.tensor(
@@ -50,16 +45,33 @@
 #     ]
 # )
 #
+# print(a.shape)
 # print(torch.topk(a,k=2,dim=0))
 
-# 有限性判断
-import torch
-a = torch.rand(2,3)
+# import numpy as np
+# import torch
+#
+# a = torch.tensor([1,2,np.nan])
+# print(a)
 
-print(a/ 0)
-print(torch.isfinite(a))
-print(torch.isfinite(a/0))
-print(torch.isinf(a/0))
+import numpy as np
+import torch
+
+a = torch.tensor([1,2,np.nan])
+print(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
