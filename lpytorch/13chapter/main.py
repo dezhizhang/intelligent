@@ -1,12 +1,30 @@
+# import torch
+#
+# a = torch.rand(2,2) * 10
+# a = a.clamp(1,2)
+#
+# print(a)
+
+# import torch
+#
+# a = torch.rand(2,2) * 10
+# a = a.clamp(1,2)
+# print(a)
+
+# import torch
+# a = torch.rand(2,2) * 10
+# a = a.clamp(1,2)
+# print(a)
+
 import torch
+a = torch.rand(2,2) * 10
+a = a.clamp(1,2)
+print(a)
 
-a = torch.rand(1,1)
-b = torch.rand(1,1)
 
-print(a,b)
 
-print(torch.dist(a,b,p=1))
 
-print(torch.norm(a))
+
+
 
 

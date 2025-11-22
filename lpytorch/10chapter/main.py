@@ -22,9 +22,11 @@
 
 
 import torch
-
-a = torch.rand(2,2) * 10
+a = torch.rand(2,2)
 print(torch.histc(a,6,0,0))
+
+
+
 
 
 
