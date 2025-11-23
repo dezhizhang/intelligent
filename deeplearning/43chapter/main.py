@@ -89,8 +89,23 @@ def dm06():
     nn.init.kaiming_uniform_(linear.weight)
     print(linear.weight.data)
 
+# def dm07():
+#     linear = nn.Linear(5,3)
+#     nn.init.xavier_normal_(linear.weight)
+#     print(linear.weight.data)
+#
+# def dm07():
+#     linear = nn.Linear(5,3)
+#     nn.init.xavier_normal(linear.weight)
+#     print(linear.weight.data)
+def dm07():
+    linear = nn.Linear(5,3)
+    nn.init.xavier_normal_(linear.weight)
+    print(linear.weight.data)
+
+
 
 
 if __name__ == '__main__':
-    dm05()
+    dm07()
 
