@@ -13,15 +13,7 @@ vector_store = Chroma(
     persist_directory="../chapter/chroma_langchain_db"
 )
 
-# 相拟度查询
-result = vector_store.similarity_search(
-    "What"
-)
-
-
-for index,result in enumerate(result):
-    print(index)
-    print(result)
+print(vector_store)
 
 
 
