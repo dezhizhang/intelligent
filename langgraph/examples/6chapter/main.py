@@ -39,8 +39,15 @@ def indexing(docs):
         print(f"集合:{vector_store._collection.name}")
         print(ids)
 
-docs = [
-    Document(page_content="功能好用户好哈哈"),
-    Document(page_content="我国"),
-]
-indexing(docs)
+def query_width_score(query):
+    for i in range(len(score_measures)):
+        results = vector_stores[i].similarity_search_with_score(query)
+        print(f"搜索:{query}")
+
+        for doc,score in results:
+            print(doc.page_content,end="")
+            print(f"{score_measures[i]}:{score}")
+
+
+
+query_width_score("我刚和朋友通完电话")
