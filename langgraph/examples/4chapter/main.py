@@ -1,5 +1,8 @@
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import  Chroma
+from langchain_core.documents import Document
+from langchain_core.runnables import chain
+from typing import List
 
 
 embedding = OllamaEmbeddings(
@@ -13,7 +16,18 @@ vector_store = Chroma(
     persist_directory="../chapter/chroma_langchain_db"
 )
 
-print(vector_store)
+
+
+# 用检索器进行相拟度查询
+@chain
+def retriever(query:str) -> List[Document]:
+    return vector_store.similarity_search(query,k=1)
+
+result = retriever.invoke("What imitations dose Force-aware have?")
+print(result)
+
+
+
 
 
 
