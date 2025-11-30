@@ -31,7 +31,7 @@ embedding = OllamaEmbeddings(
     model="nomic-embed-text",
     base_url="http://localhost:11434"
 )
-print(embedding)
+
 
 embedding.embed_query(all_splits[0].page_content)
 
