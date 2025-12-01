@@ -63,3 +63,4 @@ llm = init_chat_model(
 for chunk in llm.stream("你是 请解释一下大模型"):
     print(chunk.content,end="",flush=True)
 ```
+### 第一个智能体
