@@ -49,7 +49,6 @@ llm = ChatOpenAI(
 for chunk in llm.stream("来一首唐诗"):
     print(chunk.content, end='', flush=True)
 
-
 ### 新版本v1.0
 from langchain.chat_models import init_chat_model
 
@@ -61,6 +60,56 @@ llm = init_chat_model(
 )
 
 for chunk in llm.stream("你是 请解释一下大模型"):
-    print(chunk.content,end="",flush=True)
+    print(chunk.content, end="", flush=True)
 ```
-### 第一个智能体
+
+## 创建自能体
+
+### 1. 创建基础自能体
+
+```python
+from langchain.agents import create_agent
+from dotenv import load_dotenv
+
+load_dotenv()
+
+agent = create_agent(
+    model="deepseek:deepseek-chat"
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "hello wold"}]
+})
+
+messages = result['messages']
+
+for message in messages:
+    print(message)
+
+
+```
+### 2. 创建工具类型自能体
+````python
+from langchain.agents import create_agent
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+def get_weather(city: str) -> str:
+    """获取天气信息"""
+    return f"It's always sunny in {city}!"
+
+
+agent = create_agent(
+    model="deepseek:deepseek-chat",
+    tools=[get_weather]
+)
+
+result = agent.invoke({"messages": [{"role": "user", "content": "What is the weather in SF"}]})
+messages = result['messages']
+
+for message in messages:
+    print(message)
+
+````

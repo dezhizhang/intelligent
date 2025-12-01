@@ -1,5 +1,5 @@
-from langchain.agents import create_agent
-from dotenv import load_dotenv
+from  langchain.agents import create_agent
+from dotenv import  load_dotenv
 
 load_dotenv()
 
@@ -7,10 +7,14 @@ agent = create_agent(
     model="deepseek:deepseek-chat"
 )
 
-result = agent.invoke({"messages":[{"role":"user","content":"hello wold"}]})
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "hello wold"}]
+})
 
-print(result)
+messages = result['messages']
 
+for message in messages:
+    print(message)
 
 
 
