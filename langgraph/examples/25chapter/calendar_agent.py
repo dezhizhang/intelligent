@@ -41,4 +41,7 @@ def test_calendar_agent():
         message = event["messages"][-1].prettry_print()
         print(message)
 
+test_calendar_agent()
+
+
 
