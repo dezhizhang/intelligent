@@ -8,8 +8,8 @@ from langchain_chroma import Chroma
 import os
 import shutil
 
-if os.path.exists("./chroma_rag_db"):
-    shutil.rmtree("./chroma_rag_db")
+if os.path.exists("../21chapter/chroma_rag_db"):
+    shutil.rmtree("../21chapter/chroma_rag_db")
 
 page_url = "https://aint.top/strategy/detail?slug=6756d13981739f25f2a02ec8"
 
