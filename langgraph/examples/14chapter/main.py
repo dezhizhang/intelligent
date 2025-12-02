@@ -1,15 +1,14 @@
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver
-from  dotenv import load_dotenv
+from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(verbose=True)
 
 checkpoint = InMemorySaver()
 
 agent = create_agent(
     model="deepseek:deepseek-chat",
-    # 创建记忆功能
-    checkpointer=checkpoint,
+    checkpointer=checkpoint
 )
 
 config = {"configurable":{"thread_id":"1"}}
