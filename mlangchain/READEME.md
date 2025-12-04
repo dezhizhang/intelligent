@@ -109,7 +109,9 @@ response = llm.invoke(prompt)
 print(response)
 
 ```
+
 ### 3. 占位符提示词模板
+
 ```python
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import AIMessage, HumanMessage
@@ -136,18 +138,18 @@ response = llm.invoke(prompt)
 print(response)
 
 ```
+
 ### 4. 少量样本提示词模板
+
 ```python
 from langchain_core.prompts import PromptTemplate, FewShotPromptTemplate
 from langchain_openai import ChatOpenAI
-
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
     base_url="https://poloai.top/v1"
 )
-
 
 examples = [
     {"input": "北京天气怎么样", "output": "北京市"},
@@ -160,7 +162,6 @@ example_prompt = PromptTemplate(
     template="输入：{input}\n输出：{output}",
 )
 
-
 few_shot_prompt = FewShotPromptTemplate(
     examples=examples,
     example_prompt=example_prompt,
@@ -172,4 +173,137 @@ prompt = few_shot_prompt.format(input="烟花三月下场州")
 
 response = llm.invoke(prompt)
 print(response.content)
+```
+
+### 5. 加载外部提示词模板
+
+```python
+from langchain_core.prompts import load_prompt
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="gpt-4",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+prompt_template = load_prompt("08-prompt.json")
+
+prompt = prompt_template.invoke({"name": "小明", "who": "猫"})
+response = llm.invoke(prompt)
+print(response)
+
+```
+
+### 6. 部份赋值提示词模板
+
+```python
+
+from langchain_core.prompts import PromptTemplate
+
+prompt_template = PromptTemplate.from_template("把大像放在冰箱需要三步，第一步:{first},第二步:{second},第三步:{third}")
+
+first_prompt_template = prompt_template.partial(first="打开冰箱")
+second_prompt_template = prompt_template.partial(second="把大像放进去")
+third_prompt_template = prompt_template.partial(third="关闭冰箱")
+
+print(third_prompt_template)
+
+```
+
+## 选择器类型
+
+### 1. 长度样例选择器
+
+```python
+
+from langchain_core.example_selectors import LengthBasedExampleSelector
+from langchain_core.prompts import PromptTemplate, FewShotPromptTemplate
+
+examples = [
+    {"input": "快乐", "output": "悲伤"},
+    {"input": "高", "output": "矮"},
+    {"input": "精力充沛", "output": "昏昏欲睡"},
+    {"input": "阳光", "output": "阴暗"},
+    {"input": "喧哗", "output": "安静"},
+]
+
+example_prompt = PromptTemplate(
+    input_variables=["input", "output"],
+    template="input:{input}\noutput:{output}"
+)
+
+example_selector = LengthBasedExampleSelector(
+    examples=examples,
+    example_prompt=example_prompt,
+    max_length=50,
+    get_text_length=lambda x: len(x),
+)
+
+dynamic_prompt = FewShotPromptTemplate(
+    example_selector=example_selector,
+    example_prompt=example_prompt,
+    suffix="input:{input}\noutput:",
+    input_variables=["input"],
+)
+
+short_question = "大"
+prompt = dynamic_prompt.format(input=short_question)
+print(prompt)
+
+```
+
+### 3. 自定义选择器
+
+```python
+from typing import Any, Dict, List
+from langchain_core.example_selectors import BaseExampleSelector
+from langchain_core.prompts import FewShotPromptTemplate, PromptTemplate
+
+
+class CustomSelector(BaseExampleSelector):
+    """医疗示例选择器"""
+
+    def __init__(self, examples: List[dict[str, str]]):
+        """
+            初始化医疗示例选择器
+            :param examples: 医疗相关的示列列表，每个示例是一个字典，包含输入和输出
+        """
+        self.examples = examples
+
+    def add_example(self, example: dict[str, str]) -> Any:
+        """将示例添加到存储中的键"""
+        self.examples.append(example)
+
+    def select_examples(self, input_variables: dict[str, str]) -> List[dict[str, str]]:
+        """
+        根据输入变量选择医疗示例
+        :param input_variables: 包含选择条件(如疾病名称、症获等)的字典
+        :return:符合条件的示列表
+        """
+
+        disease_name = input_variables.get("disease_name", None)
+        if disease_name is None:
+            return []
+        selected_examples = [
+            example for example in self.examples
+            if disease_name.lower() in example['input'].lower()
+        ]
+        return selected_examples
+
+
+# 示例数据,模拟数据库存放时数据
+
+examples = [
+    {"input": "流感症状", "output": "发烧、咳嗽、喉咙痛、身体酸痛。"},
+    {"input": "糖尿病治疗", "output": "饮食控制、运动、药物"},
+    {"input": "新冠肺炎症状", "output": "发烧、咳嗽、疲劳、味觉或嗅觉丧失。"},
+    {"input": "糖尿病症状", "output": "口渴、尿频、体重减轻。"}
+]
+
+custom_selector = CustomSelector(examples)
+selected_examples = custom_selector.select_examples({"disease_name": "糖尿病"})
+print(selected_examples)
+
+
 ```
