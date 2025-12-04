@@ -1,6 +1,8 @@
 # langchain
 
-### 模型的调用
+## 大模型
+
+### 1. 模型的调用
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -16,7 +18,7 @@ print(response.content)
 print(type(response))
 ```
 
-### 对话模型调用
+### 2. 对话模型调用
 
 ```python
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -38,7 +40,7 @@ print(response.content)
 
 ```
 
-### 多轮对话
+### 3. 多轮对话
 
 ```python
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
@@ -82,4 +84,28 @@ llm = ChatOpenAI(
 
 response = llm.invoke(prompt)
 print(response.content)
+```
+
+### 2. 会话提示词模板
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+
+prompt_template = ChatPromptTemplate([
+    ("system", "你是一个乐于肋人的助手"),
+    ("user", "给我讲一个关于{topic}的笑话")
+])
+
+prompt = prompt_template.invoke({"topic": "python"})
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+response = llm.invoke(prompt)
+print(response)
+
 ```
