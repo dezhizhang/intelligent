@@ -422,7 +422,54 @@ response = llm.invoke(format_prompt)
 output = parser.invoke(response)
 print(output)
 
+```
 
+### 6. 自定义格式化输出
+
+```python
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import AIMessage, AIMessageChunk
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+
+def parse(ai_message: AIMessage) -> str:
+    """Parse the AI message"""
+    return ai_message.content.swapcase()
+
+
+response = llm.invoke("hello")
+print(parse(response))
+```
+
+## LCEL 表过式
+
+### 1. 管道符表过式
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1"
+)
+
+prompt_template = ChatPromptTemplate.from_template("给我讲一个{topic}的笑话")
+
+chain = prompt_template | llm
+
+response = chain.invoke({"topic": "老王"})
+print(response)
 
 ```
+
+
+
+
 
