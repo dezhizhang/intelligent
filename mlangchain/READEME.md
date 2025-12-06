@@ -573,6 +573,61 @@ for chunk in transform.stream("hello world"):
 
 ```
 
+### 5. RunnableSequence 串形调用
+
+```python
+from langchain_core.runnables import RunnableLambda, RunnableSequence
+
+
+def add_one(x: int) -> int:
+    return x + 1
+
+
+def mul_two(x: int) -> int:
+    return x * 2
+
+
+add_one_runnable = RunnableLambda(func=add_one)
+mul_two_runnable = RunnableLambda(func=mul_two)
+
+# sequence = RunnableSequence(first=add_one_runnable, last=mul_two_runnable)
+
+sequence = add_one_runnable | mul_two_runnable
+print(sequence.get_graph().draw_ascii())
+print(sequence.invoke(1))
+
+
+```
+
+### 6. RunnableParallel 并行调用
+
+```python
+from langchain_core.runnables import RunnableLambda, RunnableParallel
+
+
+def add_one(x: int) -> int:
+    return x + 1
+
+
+def mul_two(x: int) -> int:
+    return x * 2
+
+
+def mul_three(x: int) -> int:
+    return x * 3
+
+
+runnable_1 = RunnableLambda(add_one)
+runnable_2 = RunnableLambda(mul_two)
+runnable_3 = RunnableLambda(mul_three)
+
+pipeline = runnable_1 | RunnableParallel(
+    {"mul_two": runnable_2, "mul_three": runnable_3},
+)
+
+print(pipeline.get_graph().draw_ascii())
+
+```
 
 
 
