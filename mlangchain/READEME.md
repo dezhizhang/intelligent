@@ -469,6 +469,65 @@ print(response)
 
 ```
 
+### 2. LCEL 实现的基本原理
+
+```python
+class Expression:
+    """表过式基类，所有组件都继承自此类"""
+
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, value):
+        return self.func(value)
+
+    def __or__(self, other):
+        """重载 | 运算符，返回一个新的串联表达式"""
+        return Expression(lambda x: other(self(x)))
+
+
+def upper(s):
+    return s.upper()
+
+
+def lower(s):
+    return s.lower()
+
+
+def reverse(s):
+    return s[::-1]
+
+
+Upper = Expression(upper)
+Lower = Expression(lower)
+Reverse = Expression(reverse)
+
+result = Expression(lambda x: x) | Upper | Reverse
+
+print(result("hello world"))
+
+```
+
+### 3. RunnableLambda 对像调用
+
+```python
+
+from langchain_core.runnables import RunnableLambda
+
+
+def multiply(a: int, b: int) -> int:
+    return a * b
+
+
+def multiply_dict_wrapper(inputs: dict):
+    return multiply(inputs['a'], inputs['b'])
+
+
+runnable_multiply = RunnableLambda(multiply_dict_wrapper)
+print(runnable_multiply.invoke({"a": 2, "b": 3}))
+
+```
+
 
 
 
