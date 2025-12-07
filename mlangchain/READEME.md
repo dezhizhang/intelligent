@@ -806,7 +806,7 @@ print(r1)
 
 ## 文件加载
 
-### 1.  TextLoader 加载text文本
+### 1. TextLoader 加载text文本
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -817,7 +817,9 @@ document = loader.load()
 print(document[0].page_content)
 
 ```
+
 ### 2. PyPDFLoader 加载pdf文件
+
 ```python
 from langchain_community.document_loaders import PyPDFLoader
 
@@ -825,10 +827,12 @@ loader = PyPDFLoader(file_path="examples.pdf")
 
 document = loader.load()
 
-for i,doc in enumerate(document):
+for i, doc in enumerate(document):
     print(f"文档片段{i + 1} 内容:{doc}")
 ```
+
 ### 3. Docx2txtLoader 加载doc文档
+
 ```python
 from langchain_community.document_loaders import Docx2txtLoader
 
@@ -838,6 +842,31 @@ document = loader.load()
 
 for i, doc in enumerate(document):
     print(f'文档片段{i + 1},文档内容:{doc}')
+
+```
+
+## 工具函数
+
+### 1. 装饰器工具函数
+
+```python
+from langchain_core.tools import tool
+from pydantic import BaseModel, Field
+
+
+class CityModel(BaseModel):
+    city: str = Field(..., description="城市名称")
+
+
+@tool(description="获取天气信息", args_schema=CityModel)
+def get_weather(city: str) -> str:
+    """获取城市天气信息"""
+    return f"It's sunny in {city}"
+
+
+print(get_weather.name)
+print(get_weather.description)
+print(get_weather.args)
 
 ```
 
