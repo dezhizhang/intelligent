@@ -1,6 +1,6 @@
 from langchain_core.messages import AIMessage,HumanMessage
 from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
-from langchain_ollama import ChatOllama
+from langchain_ollama import  ChatOllama
 
 llm = ChatOllama(
     model="deepseek-r1:7b",
@@ -25,4 +25,7 @@ response = chain.invoke({
 })
 
 print(response)
+
+
+
 
