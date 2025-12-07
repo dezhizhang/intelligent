@@ -54,5 +54,39 @@ async def create_user(item:Item):
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
 ```
+### 4. 参数约束
+```python
+import uvicorn
+from typing import Union
+from  fastapi import FastAPI
+
+app = FastAPI()
+@app.get("/query/{id}")
+async def get_query(id:Union[int,str]):
+    return {"id":id}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app",host="0.0.0.0",port=8000,reload=True)
+```
+### 5. 获取请求体
+```python
+import uvicorn
+from fastapi import FastAPI,Request
+
+app = FastAPI()
+
+
+@app.get("/client-info")
+def client_info(request: Request):
+    return {
+        "请求URL":request.url,
+        "请求方法":request.method,
+        "请求IP":request.client.host,
+    }
+
+
+if __name__ == "__main__":
+   uvicorn.run("main:app",host="0.0.0.0",port=8000,reload=True)
+```
 
 
