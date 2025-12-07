@@ -804,6 +804,43 @@ print(r1)
 
 ```
 
+## 文件加载
+
+### 1.  TextLoader 加载text文本
+
+```python
+from langchain_community.document_loaders import TextLoader
+
+loader = TextLoader(file_path="./examples.txt", encoding="utf-8")
+
+document = loader.load()
+print(document[0].page_content)
+
+```
+### 2. PyPDFLoader 加载pdf文件
+```python
+from langchain_community.document_loaders import PyPDFLoader
+
+loader = PyPDFLoader(file_path="examples.pdf")
+
+document = loader.load()
+
+for i,doc in enumerate(document):
+    print(f"文档片段{i + 1} 内容:{doc}")
+```
+### 3. Docx2txtLoader 加载doc文档
+```python
+from langchain_community.document_loaders import Docx2txtLoader
+
+loader = Docx2txtLoader(file_path='examples.docx')
+
+document = loader.load()
+
+for i, doc in enumerate(document):
+    print(f'文档片段{i + 1},文档内容:{doc}')
+
+```
+
 
 
 
