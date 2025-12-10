@@ -1,4 +1,4 @@
-import numpy as np
+import  numpy as np
 import matplotlib.pyplot as plt
 
 # 定义函数y=sin(x)
@@ -8,12 +8,10 @@ y = np.sin(x)
 # 定义导函数
 y1 = np.cos(x)
 
+# 绘制图形
 plt.plot(x,y,label="sin(x)")
 plt.plot(x,y1,label="cos(x)")
 plt.xlabel("x")
 plt.ylabel("y")
 plt.legend()
 plt.show()
-
-
-
