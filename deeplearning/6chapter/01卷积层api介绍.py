@@ -24,8 +24,18 @@ def dm01():
     # 具体的卷积计算
     conv_img = conv(img3)
 
-    # 打印卷积后的结果
-    print(f"conv_img shape: {conv_img.shape}")
+    # 可视化第一个通道的特征图
+    img4 = conv_img[0]
+
+    # 把上述的图从CHW-HWC
+    img5 = img4.permute(1,2,0)
+
+    # 可视化
+    feature1 = img5[:,:,3].detach().numpy()
+    plt.imshow(feature1)
+    plt.show()
+
+    print(f"img4 shape: {img4.shape}")
 
 
 
