@@ -47,4 +47,19 @@ if __name__ == "__main__":
 ```bash
 uvicorn main:app -reload 
 ```
+### 3. 路径参数
+```python
+import uvicorn
+from  fastapi import  FastAPI
+
+app = FastAPI()
+
+
+@app.get("/args/{id}")
+def path_args1(id:int):
+    return {"message": f"{id}"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8081)
+```
 
