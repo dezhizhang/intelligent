@@ -18,8 +18,5 @@ def dm01():
     print(f"outputs shape: {outputs}")
 
 
-
-
-
 if __name__ == '__main__':
     dm01()
