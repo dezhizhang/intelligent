@@ -1,16 +1,30 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+import os
+import dotenv
+import requests
+
+dotenv.load_dotenv()
+API_KEY = os.getenv("DEEPSEEK_API_KEY")  # 放在 .env 里
+
+response = requests.post(
+    "https://api.deepseek.com/chat/completions",
+    headers={
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": f"Bearer sk-abe370cdbb064f86b69cce0ee2d60007",  # 注意 Bearer
+    },
+    json={
+        "model": "deepseek-reasoner",
+        "messages": [{"role": "user", "content": "你好，你是?"}],
+        "stream": False,
+    }
+)
+
+print(response.json())
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+#
