@@ -1,5 +1,4 @@
-
-
+import json
 import os
 import dotenv
 import requests
@@ -7,7 +6,7 @@ import requests
 dotenv.load_dotenv()
 API_KEY = os.getenv("DEEPSEEK_API_KEY")  # 放在 .env 里
 
-response = requests.post(
+with requests.post(
     "https://api.deepseek.com/chat/completions",
     headers={
         "Content-Type": "application/json",
@@ -17,11 +16,16 @@ response = requests.post(
     json={
         "model": "deepseek-reasoner",
         "messages": [{"role": "user", "content": "你好，你是?"}],
-        "stream": False,
+        "stream": True,
     }
-)
+) as resp:
 
-print(response.json())
+    for line in resp.iter_lines(decode_unicode=True):
+       if line:
+           if line.startswith("data:"):
+               data = line.lstrip("data:").strip()
+               print("data",data)
+
 
 
 
