@@ -4,7 +4,11 @@ from code.config import get_settings
 from fastapi import FastAPI
 # from app.infrastructure.logging import setup_logging
 #
+from app.interfaces.endpoints.routes import  router
+
 from contextlib import asynccontextmanager
+from fastapi.middleware.cors import CORSMiddleware
+
 
 
 # 1. 加载配置信息
@@ -34,6 +38,8 @@ async def lifespan(app: FastAPI):
         yield
     finally:
         pass
+
+# 4. 创建应用实例
 app = FastAPI(
     title="通用智能体",
     lifespan=None,
@@ -41,6 +47,21 @@ app = FastAPI(
     openapi_tags=openai_tags,
     version="0.1.0",
 )
+
+
+# 5. 配置cors中间件，解决跨域问题
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# 6. 集成路由
+app.include_router(router,prefix="/api")
+
+
 
 
 
