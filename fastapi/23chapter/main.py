@@ -14,7 +14,10 @@ TORTOISE_ORM: Dict = {
         "default": f"mysql://root:{password}@localhost:3306/itcast"
     },
     "apps": {
-
+        "models":{
+            "models": ["model"],
+            "default_connection": "default"
+        }
     },
     "use_tz":False,
     "timezone":"UTC", #默认时区
