@@ -8,7 +8,7 @@ from typing import Optional
 class UserRepository(ABC):
 
     @abstractmethod
-    async def add(self, user: User) -> User:
+    async def save(self, user: User) -> User:
         """保存用户"""
         pass
     @abstractmethod
