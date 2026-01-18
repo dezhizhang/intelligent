@@ -29,7 +29,7 @@ class UserRepository(ABC):
         """删除用户"""
         pass
     @abstractmethod
-    async def delete_all(self) -> None:
+    async def find_all(self) -> None:
         """删除所有用户"""
         pass
 
