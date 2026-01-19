@@ -24,6 +24,9 @@ class UserRepository(ABC):
         """检查用户名是否存在"""
         pass
 
+    async def verify_password(self, new_password: str,old_password) -> bool:
+        pass
+
     @abstractmethod
     async def delete(self,user_id: UserId) -> Optional[User]:
         """删除用户"""
