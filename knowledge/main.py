@@ -1,12 +1,15 @@
+
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
 
-client = OpenAI(
-    # 若没有配置环境变量，请用百炼API Key将下行替换为：api_key="sk-xxx",
-    api_key="sk-f0ed6a3b383746bb993dc066493e249d",
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+llm = OpenAI(
+    api_key=os.getenv("DASHSCOPE_API_KEY"),
+    base_url=os.getenv("DASHSCOPE_BASE_URL"),
 )
-completion = client.chat.completions.create(
+
+completion = llm.chat.completions.create(
     model="qwen3-max",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
@@ -14,5 +17,6 @@ completion = client.chat.completions.create(
     ],
     stream=True
 )
+
 for chunk in completion:
-    print(chunk.choices[0].delta.content, end="", flush=True)
+    print(chunk.choices[0].delta.content,end="",flush=True)
