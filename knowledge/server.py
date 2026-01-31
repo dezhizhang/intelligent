@@ -1,7 +1,17 @@
+import signal
 import sys
 
 import uvicorn
 import argparse
+
+
+def handle_shutdown(sig, frame):
+    sys.exit(0)
+
+#  监听退出信号
+signal.signal(signal.SIGINT, handle_shutdown)
+signal.signal(signal.SIGTERM, handle_shutdown)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run the server')
@@ -29,7 +39,7 @@ if __name__ == '__main__':
         type=str,
         default="INFO",
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-        help="Log level"
+        help="Log level defaults to INFO"
     )
     args = parser.parse_args()
     reload = False
