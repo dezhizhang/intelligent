@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.14.3",
+    "chroma>=0.2.0",
     "chromadb>=1.4.1",
     "dashscope>=1.25.9",
     "dingtalk-stream>=0.24.3",
