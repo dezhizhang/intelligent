@@ -1,0 +1,42 @@
+
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select,update,delete
+from sqlalchemy.orm import sessionmaker
+
+
+class BaseDAO:
+    def __init__(self, db: AsyncSession,model,primary_key:str="id"):
+        """
+        初始化BaseDAO
+        :param db:
+        :param model:
+        :param primary_key:
+        """
+        self.db = db
+        self.model = model
+        self.primary_key = primary_key
+
+
+    async def create(self,**kwargs):
+        """通用创建方法"""
+        instance = self.model(**kwargs)
+        self.db.add(instance)
+        await self.db.commit()
+        await self.db.refresh(instance)
+        return instance
+
+    async def batch_create(self,objects:list):
+        """创建批量通用方法"""
+        instances = [self.model(**obj.dict()) for obj in objects]
+        self.db.add_all(instances)
+        await self.db.commit()
+        for instance in instances:
+            await self.db.refresh(instance)
+        return instances
+
+    async def get_by_primary_key(self,key_value):
+        """通过主键获取记录"""
+        stmt = select(self.model).where(getattr(self.model,self.primary_key) == key_value)
+        result = await self.db.execute(stmt)
+        return result.scalar_one_or_none()
+
