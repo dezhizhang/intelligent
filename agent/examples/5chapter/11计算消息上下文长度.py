@@ -1,7 +1,7 @@
 import transformers
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(
-    "../resources/tokenizer",
+    "../../resources/tokenizer",
     trust_remote_code=True,
 )
 

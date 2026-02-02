@@ -6,7 +6,7 @@ import requests
 
 dotenv.load_dotenv()
 
-img_path = "../img/广州塔.jpeg"
+img_path = "../../img/广州塔.jpeg"
 
 with open(img_path, "rb") as f:
     image_data = f.read()
