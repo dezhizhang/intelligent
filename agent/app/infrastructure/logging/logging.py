@@ -14,7 +14,7 @@ def setup_logging():
     root_logger = logging.getLogger()
 
     # 3. 设置根日志处理器等级
-    log_level = getattr(logging, settings.LOG_LEVEL)
+    log_level = getattr(logging, settings.log_level)
     root_logger.setLevel(log_level)
 
     # 4. 日志输出格式定义
