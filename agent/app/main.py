@@ -6,6 +6,7 @@ from core.config import get_settings
 from app.infrastructure.logging import setup_logging
 from app.interfaces.endpoints.routes import router
 from fastapi.middleware.cors import CORSMiddleware
+from app.interfaces.errors.exception_handlerss import register_exception_handlers
 
 # 1.加载配置信息
 settings = get_settings()
@@ -57,6 +58,8 @@ app.add_middleware(
 )
 
 # 5. 集成路由
+register_exception_handlers(app)
+
 app.include_router(router,prefix="/api")
 
 

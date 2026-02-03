@@ -3,12 +3,24 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.interfaces.schemas import Response
 from starlette.exceptions import HTTPException
+from app.application.errors.exceptions import AppException
 
 logger = logging.getLogger(__name__)
 
 
 def register_exception_handlers(app: FastAPI):
     """处理项目中所有的异常并统一处理，涵盖：自定义业务状态异常，HTTP异常，通用异常"""
+
+    @app.exception_handler(AppException)
+    async def app_exception_handler(request: Request, e: AppException):
+        return JSONResponse(
+            status_code=e.status_code,
+            content=Response(
+                code=e.status_code,
+                msg=e.msg,
+                data={}
+            ).model_dump()
+        )
 
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request: Request, e: HTTPException) -> JSONResponse:
@@ -20,7 +32,7 @@ def register_exception_handlers(app: FastAPI):
                 code=e.status_code,
                 msg=e.detail,
                 data={}
-            )
+            ).model_dump()
         )
 
 
