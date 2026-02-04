@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from core.config import get_settings
+from app.infrastructure.storage.redis import get_redis
 from app.infrastructure.logging import setup_logging
 from app.interfaces.endpoints.routes import router
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,10 +33,14 @@ async def lifespan(app: FastAPI):
     # 1. 打印日志表过程序开始了
     logger.info("正在初始化")
 
+    # 初始化redis缓存客户端
+    redis = get_redis()
+    await  redis.init()
     try:
         #lifespan分界点
         yield
     finally:
+        await redis.shutdown()
         logger.info("正在关闭")
         pass
 
