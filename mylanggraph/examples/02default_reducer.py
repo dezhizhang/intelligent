@@ -16,6 +16,3 @@ node1_update = {"foo":2}
 
 state = update_state(state, node1_update)
 print(state)
-
-
-
