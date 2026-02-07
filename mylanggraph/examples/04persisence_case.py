@@ -86,11 +86,3 @@ input_message = HumanMessage(content="what is my name?")
 # for event in app.stream({"messages":[input_message]},config,stream_mode="values"):
 #     event["messages"][-1].pretty_print()
 
-
-
-
-
-
-
-
-
