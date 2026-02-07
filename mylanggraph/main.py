@@ -1,53 +1,34 @@
-# from typing import TypedDict,List,Dict,Any
-#
-# class State(TypedDict):
-#     foo:int
-#     bar:List[str]
-#
-# def update_state(current_state: State, updates: State) -> None:
-#     new_state = current_state.copy()
-#
-#     new_state.update(updates)
-#     return new_state
-#
-# state:State = {"foo":1,"bar":['hi']}
-#
-# node1_update = {"foo":2}
-#
-# state = update_state(state, node1_update)
-# print(state)
-#
+from typing import Annotated
 
-from langchain_core.runnables import RunnableConfig
-from langgraph.graph import StateGraph,START
-from langgraph.graph import END
+from math import trunc
+from typing_extensions import TypedDict
+from langgraph.graph.message import add_messages
+from langchain_core.tools import tool
+from langgraph.prebuilt import ToolNode
+from langchain_openai import ChatOpenAI
 
-graph = StateGraph(dict)
-
-# 定义节点
-def my_node(state:dict,config:RunnableConfig):
-    print("in node",config["configurable"]["user_id"])
-    return {"result":f"hello,{state['input']}"}
+class State(TypedDict):
+    message:Annotated[list,add_messages]
 
 
-def my_other_node(state:dict):
-    return state
-
-graph.add_node("my_node",my_node)
-graph.add_node("other_node",my_other_node)
-
-
-graph.add_edge(START,"my_node")
-graph.add_edge("my_node","other_node")
-graph.add_edge("other_node",END)
+@tool
+def search(query:str):
+    """call to surf the web."""
+    return ["The answer to your question lies within."]
 
 
-app = graph.compile()
+tools = [search]
 
-graph_png = app.get_graph().draw_mermaid_png()
-with open("node_case.png","wb") as f:
-    f.write(graph_png)
+tool_node = ToolNode(tools)
 
+llm = ChatOpenAI(
+    api_key="sk-zUDelHgZPjOX4eP3tnTcVXRC9cgA8yerufoOMyeM7V9Hx9GM",
+    base_url="https://poloai.top/v1",
+    temperature=0,
+    streaming=True,
+)
+
+bound_model = llm.bind_tools(tools)
 
 
 
