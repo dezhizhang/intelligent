@@ -1,23 +1,3 @@
-# from typing import TypedDict,List,Dict,Any
-#
-# class State(TypedDict):
-#     foo:int
-#     bar:List[str]
-#
-# def update_state(current_state: State, updates: State) -> None:
-#     new_state = current_state.copy()
-#
-#     new_state.update(updates)
-#     return new_state
-#
-# state:State = {"foo":1,"bar":['hi']}
-#
-# node1_update = {"foo":2}
-#
-# state = update_state(state, node1_update)
-# print(state)
-#
-
 from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph,START
 from langgraph.graph import END
@@ -47,8 +27,6 @@ app = graph.compile()
 graph_png = app.get_graph().draw_mermaid_png()
 with open("node_case.png","wb") as f:
     f.write(graph_png)
-
-
 
 
 
