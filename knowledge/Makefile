@@ -15,7 +15,6 @@ serve-dev:
 lint:
     uv run black --check .
 
-
 format:
     uv run black .
 
