@@ -9,6 +9,7 @@ dependencies = [
     "ipython>=9.10.0",
     "langchain>=1.2.9",
     "langchain-community>=0.4.1",
+    "langchain-deepseek>=1.0.1",
     "langchain-openai>=1.1.7",
     "langgraph>=1.0.8",
     "pyppeteer>=2.0.0",
