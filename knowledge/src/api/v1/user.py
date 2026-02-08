@@ -6,4 +6,4 @@ router = APIRouter(tags=["user"],prefix="/user")
 
 @router.get("/")
 def get_user():
-    return UserService(db=AsyncSession)
+    return UserService(db="")
