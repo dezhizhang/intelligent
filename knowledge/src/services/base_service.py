@@ -34,6 +34,30 @@ class BaseService(Generic[DTOType]):
             return self.dto_class.model_validate(instance)
         return None
 
+    async def get_all(self) -> List[DTOType]:
+        """获取所有记录"""
+        instances = await self.dao.get_all()
+        try:
+            if instances:
+                return [self.dto_class.model_validate(instances) for instance in instances]
+        except Exception as e:
+            print(e)
+            raise
+        return []
+
+    async def update_by_id(self,id,**kwargs) -> DTOType:
+        """通用更新方法"""
+        instance = await self.dao.update_by_primary_key(id,**kwargs)
+        if instance:
+            return self.dto_class.model_validate(instance)
+        return None
+
+    async def delete_by_id(self,id) -> bool:
+        """通用删除方法"""
+        return await self.dto_class.delete_by_primary_key(id)
+
+
+
 
 
 
