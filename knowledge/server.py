@@ -19,27 +19,27 @@ if __name__ == '__main__':
         '--host',
         type=str,
         default="localhost",
-        help='Host to bind to (default: localhost)'
+        help='host to bind the server to (default: localhost)'
     )
     parser.add_argument(
         '--port',
         type=int,
         default=8080,
-        help='Port to bind to (default: 8080)'
+        help='port to bind to (default: 8000)'
     )
 
     parser.add_argument(
         "--reload",
         action="store_true",
-        help="Reload the server"
+        help="reload the server"
     )
 
     parser.add_argument(
         "--log-level",
         type=str,
         default="INFO",
-        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-        help="Log level defaults to INFO"
+        choices=["critical", "error", "warning", "info", "debug"],
+        help="log level (default: info)"
     )
     args = parser.parse_args()
     reload = False
@@ -47,7 +47,12 @@ if __name__ == '__main__':
         reload = True
 
     try:
-        uvicorn.run("src.main.app:app", host=args.host, port=args.port, reload=reload)
+        uvicorn.run(
+            "src.main:app",
+            host=args.host,
+            port=args.port,
+            reload=reload
+        )
     except Exception as e:
         print(e)
         sys.exit(1)
