@@ -1,5 +1,4 @@
 from typing_extensions import TypedDict
-from IPython.display import display,Image
 from langgraph.graph import START,StateGraph,END
 from langchain_core.runnables.graph_mermaid import MermaidDrawMethod
 
