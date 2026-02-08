@@ -40,3 +40,21 @@ class BaseDAO:
         result = await self.db.execute(stmt)
         return result.scalar_one_or_none()
 
+    async def get_all(self):
+        """获取所有记录"""
+        stmt = select(self.model)
+        result = await self.db.execute(stmt)
+        return result.scalars().all()
+
+    async  def update_by_primary_key(self,key_value,**kwargs):
+        """通过主键更新"""
+        stmt = (
+            update(self.model)
+            .where(getattr(self.model,self.primary_key) == key_value)
+            .values(**kwargs)
+            .returning(self.model)
+        )
+        result = await self.db.execute(stmt)
+        await self.db.commit()
+        return result.scalar_one_or_none()
+
