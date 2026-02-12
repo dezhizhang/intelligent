@@ -51,9 +51,9 @@ uvicorn main:app --reload --port 8082
 http://localhost:8082
 ```
 
-## 参数获取
+## 请求参数获取
 
-### 路径参数获取
+### 1. 路径参数获取
 
 ```python
 from fastapi import FastAPI
@@ -71,5 +71,29 @@ if __name__ == "__main__":
 
     uvicorn.run(app, host="0.0.0.0", port=8082)
 # 输入http://localhost:8082/items/1
+```
+### 2. 查询参数
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+fake_items_db = [
+    {"item_name": "Foo"},
+    {"item_name": "Bar"},
+    {"item_name": "Baz"}
+]
+
+
+@app.get("/items")
+async def read_items(skip: int = 0, limit: int = 10):
+    return fake_items_db[skip:skip + limit]
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8082)
+# http://127.0.0.1:8000/items?skip=0&limit=10
 ```
 
