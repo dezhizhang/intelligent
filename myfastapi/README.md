@@ -72,7 +72,9 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8082)
 # 输入http://localhost:8082/items/1
 ```
+
 ### 2. 查询参数
+
 ```python
 from fastapi import FastAPI
 
@@ -95,5 +97,50 @@ if __name__ == "__main__":
 
     uvicorn.run(app, host="0.0.0.0", port=8082)
 # http://127.0.0.1:8000/items?skip=0&limit=10
+```
+
+### 3. body请求参数
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+app = FastAPI()
+
+
+@app.post("/item")
+async def create_item(item: Item):
+    return item
+```
+
+## 响应参数
+
+### 1. form响应参数
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Form
+
+app = FastAPI()
+
+
+@app.post("/login")
+async def login(username: Annotated[str, Form()]):
+    return {"username": username}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8082)
+
+
 ```
 
