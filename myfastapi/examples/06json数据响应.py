@@ -11,12 +11,8 @@ class Item(BaseModel):
     description: str | None = None
 
 app = FastAPI()
-@app.put("/items/{id}")
+@app.get("/items/{id}")
 def update_item(id:str,item:Item):
     json_compatible_item_data = jsonable_encoder(item)
     fake_db[id] = json_compatible_item_data
     return {"item":json_compatible_item_data}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8082)
