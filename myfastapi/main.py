@@ -1,21 +1,28 @@
-from datetime import datetime
-from  fastapi import FastAPI
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
-
-fake_db = {}
-
-class Item(BaseModel):
-    title:str
-    timestamp:datetime
-    description: str | None = None
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-@app.put("/items/{id}")
-def update_item(id:str,item:Item):
-    json_compatible_item_data = jsonable_encoder(item)
-    fake_db[id] = json_compatible_item_data
-    return {"item":json_compatible_item_data}
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/")
+async def main():
+    return {"message": "Hello World"}
+
 
 if __name__ == "__main__":
     import uvicorn
