@@ -1,5 +1,0 @@
-
-
-def ok():
-    print("ok")
-
