@@ -1,28 +1,31 @@
-# import dis
-#
-# def add(a):
-#     a = a + 1
-#     return a
-#
-#
-# print(dis.dis(add))
+import threading
 
-# import dis
-#
-# def add(a):
-#     a = a + 1
-#     return a
-#
-#
-# print(dis.dis(add))
+total = 0
+
+def add():
+    global total
+    for i in range(1000000):
+        total += 1
 
 
-import dis
+def desc():
+    global total
+    for i in range(1000000):
+        total -= 1
 
-def add(a):
-    a = a + 1
-    return a
 
-print(dis.dis(add))
+threading1 = threading.Thread(target=add)
+threading2 = threading.Thread(target=desc)
+threading1.start()
+threading2.start()
+
+
+threading1.join()
+threading2.join()
+
+
+print("total:", total)
+
+
 
 
