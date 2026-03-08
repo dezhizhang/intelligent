@@ -24,6 +24,9 @@ KNN算法介始 K 近领算法
         4. 模型训练
         5. 模型预测
 
+    总续:
+    K 值过小
+
 """
 
 from sklearn.neighbors import KNeighborsRegressor
