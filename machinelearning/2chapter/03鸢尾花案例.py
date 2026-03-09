@@ -70,11 +70,42 @@ def dm03_split_train_test():
     print(f"测试集的特征:{x_test} 个数:{len(x_test)}")
     print(f"测试集的标签:{y_test} <UNK>:{len(y_test)}")
 
-# 定义函数，实现鸢尾花案例
+
+# 定义函数，实现鸢尾花案例-> 加载数据、数据预处理、特征工程、模型训练、模型评估、模型预测
+def dm04_iris_evaluate_test():
+    # 1. 加载数据
+    iris_data = load_iris()
+    # 2. 数据预处理
+    x_train, x_test, y_train, y_test = train_test_split(
+        iris_data.data,
+        iris_data.target,
+        test_size=0.2,
+        random_state=23
+    )
+    # 3. 特征工程,
+    # 3.1 创建标准化对像
+    transfer = StandardScaler()
+    # 3.2 对特征列进行标准化
+    x_train = transfer.fit_transform(x_train)
+    # transform 只有转换，该函数适用于重复标准化动时
+    x_test = transfer.transform(x_test)
+
+    # 4. 模型训练
+    # 4.1 创建模型对像
+    estimator = KNeighborsClassifier(n_neighbors=3)
+    # 4.2 具体的训练模型动作
+    estimator.fit(x_train, y_train)
+
+    # 5.模型预测
+    y_pre = estimator.predict(x_test)
+    print(f"预测结果为:{y_pre}")
+
+    # 模型评估
+    print(f"正确率:{estimator.score(x_test, y_test)}")
 
 
 
 if __name__ == '__main__':
     # dm01_load_iris()
     # dm02_load_iris()
-    dm03_split_train_test()
+    dm04_iris_evaluate_test()
