@@ -6,6 +6,7 @@
 
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import joblib
@@ -39,9 +40,33 @@ def show_digit(idx):
     plt.show()
 
 
+def train_model():
+    # 1. 加载数据集
+    df = pd.read_csv('../assets/手写数字识别.csv')
+    # 2. 数据预处理
+    x = df.iloc[:,1:]
+    y = df.iloc[:,0]
+
+    # 3. 数据归一化处理
+    x = x / 255
+
+    x_train, x_test, y_train, y_test = train_test_split(x, y,test_size=0.2, random_state=23,stratify=y)
+
+    # 4. 模型训练
+    estimator = KNeighborsClassifier(n_neighbors=3)
+    estimator.fit(x_train, y_train)
+
+    # 5. 模型评估
+    print(f"准确率:{estimator.score(x_train, y_train)}")
+    print(f"准确率：{accuracy_score(y_test,estimator.predict(x_test))}")
+
+    # 6. 保存模型
+    joblib.dump(estimator, '../model/手写数字识别.pkl')
+
+
 
 if __name__ == '__main__':
-    show_digit(9)
+    train_model()
 
 
 
