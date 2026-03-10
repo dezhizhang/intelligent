@@ -63,10 +63,29 @@ def train_model():
     # 6. 保存模型
     joblib.dump(estimator, '../model/手写数字识别.pkl')
 
+def use_model():
+    # 1. 加载图片
+    x = plt.imread('../assets/demo.png')
+    # 2. 绘制图片
+    plt.imshow(x,cmap='gray')
+    plt.show()
+
+    # 3. 加载模型
+    estimator = joblib.load('../model/手写数字识别.pkl')
+
+    # 4. 模型预测
+    x = x.reshape(1,-1) / 255
+
+    # 5. 模型预测
+    y_pre = estimator.predict(x)
+
+    # 6. 打印预测结果
+    print(f"预测值为:{y_pre}")
+
 
 
 if __name__ == '__main__':
-    train_model()
+    use_model()
 
 
 
