@@ -38,7 +38,31 @@ def dm01_under_fitting():
     plt.show()
 
 
+def dm01_just_fitting():
+    np.random.seed(23)
+
+    x = np.random.uniform(-3,3,100)
+
+    y = 0.5 * x ** 2 + x + 2 + np.random.normal(0,1,100)
+    print(f"特征:{x[:5]}")
+    print(f"标签:{y[:5]}")
+
+    X = x.reshape(-1,1)
+    X2 = np.stack([x,X ** 2])
+
+    # 模型训练
+    estimator = LinearRegression()
+    estimator.fit(X2,y)
+
+    # 模型预测
+    y_pre = estimator.predict(X2)
+
+    plt.scatter(x,y)
+    plt.plot(X,y_pre,color='red')
+    plt.show()
+
+
 
 
 if __name__ == '__main__':
-    dm01_under_fitting()
+    dm01_just_fitting()
