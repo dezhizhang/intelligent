@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 
 
 def dm01_data_preprocess():
@@ -21,6 +24,23 @@ def dm01_data_preprocess():
     print(churn_df.flag.value_counts())
 
 
+def dm02_data_visualization():
+    # 1. 读取csv文件获取df对像
+    churn_df = pd.read_csv('../assets/churn.csv')
+    # 2. 对object类型的列(数据)做one-hot编码处理
+    churn_df = pd.get_dummies(churn_df,columns=['Churn','gender'])
+    # 3. 删除one-hot处理后的冗余列
+    churn_df.drop(['Churn_No','gender_Male'],axis=1,inplace=True)
+
+    # 修改列表,将Churn_Yes-> flag 充当标签列
+    churn_df.rename(columns={"Churn_Yes":"flag"},inplace=True)
+
+
+    # 4. 绘制图表
+    sns.countplot(churn_df,x="Contract_Month",hue="flag")
+    plt.show()
+
+
 
 if __name__ == '__main__':
-    dm01_data_preprocess()
+    dm02_data_visualization()
